@@ -1,0 +1,558 @@
+--warn("Roblox Is Back !!")
+--warn("7:31 (10/31/2021) --Time")
+
+local  FE = true
+local OW
+local LPLR
+local PLAY = game:GetService("Players")
+
+if FE == true then
+	OW = owner
+	LPLR = OW	
+else
+	OW = script.owner
+	LPLR = PLAY:FindFirstChild(OW.Value)
+
+end
+warn("Press X (Test Attack)")
+local DEB = game:GetService("Debris")
+local TWEEN = game:GetService("TweenService")
+local RUN = game:GetService("RunService")
+local CHAT = game:GetService("Chat")
+--local US = game:GetService("UserInputService")
+
+local MO = LPLR:GetMouse()
+local CH = LPLR.Character
+
+local HD = CH["Head"]
+local TS = CH["Torso"]
+local RA = CH["Right Arm"]
+local LA = CH["Left Arm"]
+local LG = CH["Left Leg"]
+local RG = CH["Right Leg"]
+
+local ROT  = CH["HumanoidRootPart"]
+local HU = CH:FindFirstChildOfClass("Humanoid") HU.WalkSpeed = 64
+local CURRENTFR = nil
+local TEXT = Instance.new("BillboardGui")
+TEXT.Parent = HD
+TEXT.LightInfluence = 1
+TEXT.Size = UDim2.new(0, 200, 0, 50)
+TEXT.Active = true
+TEXT.ClipsDescendants = true
+TEXT.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+TEXT.AlwaysOnTop = true
+TEXT.ExtentsOffsetWorldSpace = Vector3.new(0, 5, 0)
+local QU = TweenInfo.new(1,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0)
+
+local function PLY(TB,P)
+	TWEEN:Create(P,QU,TB):Play()
+	--return print(nil)
+end
+LPLR.Chatted:Connect(function(msg)
+	local Time = 0
+	local C = Instance.new("TextLabel")
+	CURRENTFR = C
+	C.Parent = TEXT
+	C.Size = UDim2.new(0, 200, 0, 50)
+	C.BackgroundColor = BrickColor.new("Institutional white")
+	C.BackgroundColor3 = Color3.new(1, 1, 1)
+	C.BackgroundTransparency = 1
+	C.Font = Enum.Font.SpecialElite
+	C.FontSize = Enum.FontSize.Size14
+	C.Text = ""
+	C.TextColor = BrickColor.new("Really black")
+	C.TextColor3 = Color3.new(0, 0, 0)
+	C.TextScaled = true
+	C.TextSize = 14
+	C.TextWrap = true
+	C.TextWrapped = true
+
+	--print(string.sub(msg,1,i))
+	for i = 1,string.len(msg) do
+		wait()
+		Time = Time + i/5
+		TEXT.Size = UDim2.new(0,200+i*3,0,50)
+		C.Size = UDim2.new(0,200+i*3,0,50)
+		
+		C.Text = ""..string.sub(msg,1,i)
+	end
+	coroutine.resume(coroutine.create(function()
+		wait(5)
+		local c = {
+			Rotation = math.random(-40,40),
+			TextTransparency = 1
+		}
+		PLY(c,C)
+		wait(1)
+		C:Remove()
+	end))
+end)
+coroutine.resume(coroutine.create(function()
+	while true do
+		do
+			for i,v in pairs(TEXT:GetChildren()) do
+				if v:IsA("TextLabel") then
+					if v == CURRENTFR then
+						--print("Its there")
+					else
+						coroutine.resume(coroutine.create(function()
+							local c = {
+								Rotation = math.random(-40,40),
+								TextTransparency = 1
+							}
+							PLY(c,v)
+							wait(1)
+							v:Remove()
+						end))
+					end
+				end
+			end
+		end
+		wait()
+	end
+end))
+local ID = Instance.new("StringValue",CH)
+ID.Name = "nil"
+local mm = {"a","d","c","f","2","5","7","1","3","⁝⁐","♪","µ","⁋","⁌","⁇"}
+coroutine.resume(coroutine.create(function()
+	while true do
+		wait()
+		ID.Name = ""..mm[math.random(1,#mm)]..""..mm[math.random(1,#mm)]..""
+	end
+end))
+local SS = Instance.new("Sound",TS)
+SS.SoundId = "rbxassetid://197113924"
+SS.Playing = true
+SS.Looped = true
+local RootHipWeld = Instance.new("Weld")
+RootHipWeld.Parent = CH.HumanoidRootPart
+RootHipWeld.Part0 = CH.HumanoidRootPart
+RootHipWeld.Part1 = CH.Torso
+RootHipWeld.C0 = CH.HumanoidRootPart.RootJoint.C0
+RootHipWeld.C1 = CH.HumanoidRootPart.RootJoint.C1
+
+local RightArmWeld = Instance.new("Weld")
+RightArmWeld.Parent = CH.Torso
+RightArmWeld.Part0 = CH.Torso
+RightArmWeld.Part1 = CH["Right Arm"]
+RightArmWeld.C0 = CH.Torso["Right Shoulder"].C0
+RightArmWeld.C1 = CH.Torso["Right Shoulder"].C1
+
+local LeftArmWeld = Instance.new("Weld")
+LeftArmWeld.Parent = CH.Torso
+LeftArmWeld.Part0 = CH.Torso
+LeftArmWeld.Part1 = CH["Left Arm"]
+LeftArmWeld.C0 = CH.Torso["Left Shoulder"].C0
+LeftArmWeld.C1 = CH.Torso["Left Shoulder"].C1
+
+local RightLegWeld = Instance.new("Weld")
+RightLegWeld.Parent = TS
+RightLegWeld.Part0 = TS
+RightLegWeld.Part1 = CH["Right Leg"]
+RightLegWeld.C0 = CH.Torso["Right Hip"].C0
+RightLegWeld.C1 = CH.Torso["Right Hip"].C1
+
+local LeftLegWeld = Instance.new("Weld")
+LeftLegWeld.Parent = TS
+LeftLegWeld.Part0 = TS
+LeftLegWeld.Part1 = CH["Left Leg"]
+LeftLegWeld.C0 = CH.Torso["Left Hip"].C0
+LeftLegWeld.C1 = CH.Torso["Left Hip"].C1
+
+local Neck = Instance.new("Weld")
+Neck.Parent = CH.Torso
+Neck.Part0 = CH.Torso
+Neck.Part1 = CH.Head
+Neck.C0 = CH.Torso.Neck.C0
+Neck.C1 = CH.Torso.Neck.C1
+
+local HD_ = Neck
+local TS_ = RootHipWeld
+local RA_ = RightArmWeld
+local LA_ = LeftArmWeld
+local LG_ = LeftLegWeld
+local RG_ = RightArmWeld
+
+local TB = {
+	["Torso"] = CFrame.new(0,0,0);
+	["Left Leg"] = CFrame.Angles(0, math.rad(12.032), 0);
+	["Right Leg"] = CFrame.Angles(0, math.rad(-11.803), 0);
+	["Right Arm"] = CFrame.Angles(math.rad(77.12), math.rad(76.031), math.rad(46.811))*CFrame.Angles(math.sin(tick()),0,0);
+	["Left Arm"] = CFrame.new(0.014, -0.063, -0.471) * CFrame.Angles(math.rad(51.165), math.rad(9.798), math.rad(7.85))*CFrame.Angles(math.sin(tick()),0,0);
+}
+
+function lerp(t, f)
+	for i = 0,1,f do
+		if t["Torso"] ~= nil then
+			RootHipWeld.C0 = RootHipWeld.C0:Lerp(CH.HumanoidRootPart.RootJoint.C0 * t["Torso"],i)
+		end
+		if t["Right Arm"] ~= nil then
+			RightArmWeld.C0 = RightArmWeld.C0:Lerp(CH.Torso["Right Shoulder"].C0 * t["Right Arm"], i)
+		end
+		if t["Right Leg"] ~= nil then
+			RightLegWeld.C0 = RightLegWeld.C0:Lerp(CH.Torso["Right Hip"].C0 * t["Right Leg"], i)
+		end
+		if t["Left Arm"] ~= nil then
+			LeftArmWeld.C0 = LeftArmWeld.C0:Lerp(CH.Torso["Left Shoulder"].C0 * t["Left Arm"], i)
+		end
+		if t["Left Leg"] ~= nil then
+			LeftLegWeld.C0 = LeftLegWeld.C0:Lerp(CH.Torso["Left Hip"].C0 * t["Left Leg"], i)
+		end
+		if t["Head"] ~= nil then
+			Neck.C0 = Neck.C0:Lerp(CH.Torso.Neck.C0 * t["Head"], i)
+		end
+		task.wait()
+	end
+end
+for i,v in pairs(CH:GetChildren()) do
+	if v:IsA("CharacterMesh") or v:IsA("Shirt") or v:IsA("Pants") or v:IsA("Accessory") then
+		v:Remove()
+	elseif v:IsA("Part") then
+		v.Color = Color3.fromRGB(0,0,0)
+	end
+end
+if HD:FindFirstChild("face") then
+	HD:FindFirstChild("face"):Remove()
+end
+wait()
+local Hat = Instance.new("Part")
+Hat.Parent = CH["Head"]
+local Hat_ = Instance.new("Weld",HD)
+Hat_.Part0 = HD
+Hat_.Part1 = Hat
+local Ha = Instance.new("SpecialMesh",Hat)
+Ha.MeshId = "http://www.roblox.com/asset/?id=163537933"
+Ha.Scale = Vector3.new(2.2,2.2,2.2)
+Ha.TextureId = "http://www.roblox.com/asset/?id=163537949"
+local RFACE = Instance.new("Decal",HD)
+RFACE.Texture = "rbxassetid://6719131171"
+wait()
+local ATTACK = false
+local function Attack01(h)
+	if ATTACK == false then
+		ATTACK = true
+		HU.WalkSpeed = 2
+		TB = {
+			["Torso"] = CFrame.new(0,0,0);
+			["Left Leg"] =  CFrame.Angles(math.rad(-1.547), math.rad(17.418), math.rad(15.642));
+			["Right Leg"] = CFrame.new(0.705, 0.541, 0.323) * CFrame.Angles(math.rad(-13.293), math.rad(-23.262), math.rad(-49.962));
+			["Right Arm"] = CFrame.new(0.478, -0.025, -0.104) * CFrame.Angles(math.rad(36.211), math.rad(8.193), math.rad(80.386));
+			["Left Arm"] = CFrame.new(0.014, -0.063, -0.471) * CFrame.Angles(math.rad(51.165), math.rad(9.798), math.rad(7.85));
+		}
+		lerp(TB,0.05)
+		QU = TweenInfo.new(1,Enum.EasingStyle.Bounce,Enum.EasingDirection.Out,0,false,0)
+		local pp = Instance.new("Part",HU)
+		pp.Color = Color3.fromRGB(0,0,0)
+		pp.Material = "Neon"
+		pp.Transparency = 1
+		pp.Size = Vector3.new(.05,.05,.05)
+		local m = {
+			Size = Vector3.new(5,5,5),
+			Transparency = 0
+		}
+		PLY(m,pp)
+		coroutine.resume(coroutine.create(function()
+			local x = 0
+			while true do
+				wait()
+				x = x + 1.5
+				
+				pp.Orientation = Vector3.new(x,x,x)
+			end
+		end))
+		pp.Anchored = true
+		pp.CanCollide = false
+		pp.Color = Color3.fromRGB(0,0,0)
+		pp.CFrame = RA.CFrame * CFrame.new(0,5,0)
+		DEB:AddItem(pp,7)
+		coroutine.resume(coroutine.create(function()
+			wait(7)
+			local m = {
+				Size = Vector3.new(.1,.1,.1),
+				Transparency = 1
+			}
+			PLY(m,pp)
+			local lp = Instance.new("Part",HU)
+			lp.Position = pp.Position
+			lp.Anchored = true
+			lp.Shape = "Cylinder"
+			lp.Material = "Neon"
+			lp.CanCollide = false
+			lp.Color = pp.Color
+			lp.Orientation = Vector3.new(0, 0, -90)
+			lp.Size = Vector3.new(500, 1, 1)
+			local m = {
+				Size = Vector3.new(500,13,13),
+				Transparency = 1
+			}
+			DEB:AddItem(lp,1)
+			PLY(m,lp)
+
+		end))
+		local b = false
+		pp.Touched:Connect(function(hit)
+			local hz = hit.Parent
+			if hz:IsA("Model") then
+				if b == false then
+					b = true
+					local hu = hz:FindFirstChildOfClass("Humanoid")
+					if hu then
+						if hz:FindFirstChild(ID.Name) then
+						else
+							local cp = pp:Clone()
+							cp.Massless = true
+							coroutine.resume(coroutine.create(function()
+								RUN.Heartbeat:Connect(function()
+									if cp.Parent == hz then
+										hu.Health = hu.Health - 1
+									end
+								end)
+							end))
+							hu.BreakJointsOnDeath = false
+							cp.Anchored = false
+							cp.Parent = hz
+							DEB:AddItem(cp,2)
+							local cp_ = Instance.new("Weld",hz:FindFirstChildOfClass("Part"))
+							cp_.Part0 = hz:FindFirstChildOfClass("Part")
+							cp_.Part1 = cp
+							cp_.C0 = CFrame.Angles(0,0,0)
+							coroutine.resume(coroutine.create(function()
+								local x = 0
+								local z = {
+									Size = Vector3.new(0.1,.05,.05),
+									Transparency = 1
+								}
+
+								coroutine.resume(coroutine.create(function()
+									wait(1)
+									PLY(z,cp)
+									PLY(z,pp)
+
+								end))
+								if hu.Health <= 5 then
+									for i,v in pairs(hz:GetChildren()) do
+										if v:IsA("Part") or v:IsA("MeshPart") then
+											if v.Name == "Head" then
+												local dc = v:FindFirstChild("face")
+												if dc then
+													local mp = dc
+													mp.Transparency = 1
+													mp.Texture = "rbxassetid://19264997"
+													local par = Instance.new("Part",v)
+													local w = Instance.new("Weld",v)
+													local mp = Instance.new("Decal",par)
+													mp.Texture = "rbxassetid://19264997"
+													par.Size = Vector3.new(0.837, 0.725, 0.2)
+													w.Part0 = v
+													w.Part1 = par
+													par.Transparency = 1
+													w.C0 = CFrame.new(0,0,-.5)
+													local x = 0
+													coroutine.resume(coroutine.create(function()
+														RUN.Heartbeat:Connect(function()
+															x = x + 0.05
+
+															w.C0 = CFrame.new(0,0,-.5)*CFrame.Angles(0,0,x)
+														end)
+													end))
+												else
+													local par = Instance.new("Part",v)
+													local w = Instance.new("Weld",v)
+													local mp = Instance.new("Decal",par)
+													mp.Texture = "rbxassetid://19264997"
+													par.Size = Vector3.new(0.837, 0.725, 0.2)
+													w.Part0 = v
+													w.Part1 = par
+													par.Transparency = 1
+													w.C0 = CFrame.new(0,0,-.5)
+													local x = 0
+													coroutine.resume(coroutine.create(function()
+														RUN.Heartbeat:Connect(function()
+															x = x + 0.05
+															
+															w.C0 = CFrame.new(0,0,-.5)*CFrame.Angles(0,0,x)
+														end)
+													end))
+												end
+											end
+											local mmm = {
+												Color = Color3.fromRGB(255,255,255)
+											}
+											PLY(mmm,v)
+										elseif v:IsA("Accessory") or v:IsA("Shirt") or v:IsA("Pants") then
+											v:Remove()
+										
+										end
+									end
+								end
+								while wait() do
+									x = x + 0.1
+
+									cp_.C0 = CFrame.Angles(x,x,x)
+
+								end
+							end))
+						end
+					end
+					wait()
+					b = false
+				end
+			end
+		end)
+		wait(.5)
+		TB = {
+			["Torso"] = CFrame.new(0,0,0);
+			["Left Leg"] =  CFrame.Angles(math.rad(-1.547), math.rad(17.418), math.rad(15.642));
+			["Right Leg"] = CFrame.new(0.705, 0.541, 0.323) * CFrame.Angles(math.rad(-13.293), math.rad(-23.262), math.rad(-49.962));
+			["Right Arm"] = CFrame.new(0.478, -0.025, -0.104) * CFrame.Angles(math.rad(48.587), math.rad(54.832), math.rad(73.339));
+			["Left Arm"] = CFrame.new(0.014, -0.063, -0.471) * CFrame.Angles(math.rad(51.165), math.rad(9.798), math.rad(7.85));
+		}
+		lerp(TB,0.05)
+		coroutine.resume(coroutine.create(function()
+			RUN.Heartbeat:Connect(function()
+				m = {
+					Position = hit
+				}
+				
+				PLY(m,pp)
+			end)
+		end))
+
+		
+		wait(.5)
+		HU.WalkSpeed = 64
+		QU = TweenInfo.new(1,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0)
+		ATTACK = false
+	else	
+	end
+end
+local CurrentMouse = Instance.new("RemoteEvent",CH)
+local AT1 = Instance.new("RemoteEvent",CH)
+AT1.Name = "Attack01"
+CurrentMouse.Name = "Mouse"
+AT1.OnServerEvent:Connect(function(player,h)
+	coroutine.resume(coroutine.create(function()
+		while true do
+			wait()
+			hit = Hit
+		end
+	end))
+	Attack01(h)
+end)
+HU.Died:Connect(function()
+	script:Destroy()
+end)
+CurrentMouse.OnServerEvent:Connect(function(Hit)
+	
+end)
+
+if FE == true then
+	
+	NLS([==[
+	local OW = owner
+local PLRS = game:GetService("Players")
+
+local LPLAYER = OW
+local OW = LPLAYER
+local MO = OW:GetMouse()
+local CH = OW.Character
+coroutine.resume(coroutine.create(function()
+	game:GetService("RunService").Heartbeat:Connect(function()
+		h = MO.Hit.p
+		
+				Hit = MO.Hit.p
+		
+	end)
+end))
+
+local AT1 = CH:WaitForChild("Attack01")
+local MOUSE = CH:WaitForChild("Mouse")
+local US = game:GetService("UserInputService")
+local ATTACK = false
+
+coroutine.resume(coroutine.create(function()
+	game:GetService("RunService").Heartbeat:Connect(function()
+
+		MOUSE:FireServer(Hit)
+	end)
+end))
+
+US.InputBegan:Connect(function(input,gameProcessedEvent)
+	if input.KeyCode == Enum.KeyCode.X then
+		if ATTACK == false then
+			ATTACK = true
+
+			AT1:FireServer(h)
+			wait(.5)
+			ATTACK = false
+		end
+	end
+end)
+	]==],OW.PlayerGui)
+else
+	script.nilfactor.Disabled = false
+end
+function rayCast(Position, Direction, Range, Ignore)
+	return game:service("Workspace"):FindPartOnRay(Ray.new(Position, Direction.unit * (Range or 999.999)), Ignore)
+end
+local ani = ""
+local S0 = 0
+local C0 = 1
+
+game:GetService("RunService").Heartbeat:Connect(function()
+
+	S0 = S0 + C0
+
+	local Velo = (ROT.Velocity - Vector3.new(1,0,1)).magnitude
+	local Y = ROT.Velocity.Y
+	local r,p = rayCast(ROT.Position, (CFrame.new(ROT.Position, ROT.Position - Vector3.new(0, 1, 0))).lookVector, 4, CH)
+
+	if Y > 1 and r == nil then
+		--print("Jump")
+		if ATTACK == false then
+
+		end
+	elseif Y < -1 and r == nil then
+		--print("Falling")
+		if ATTACK == false then
+
+		end
+	elseif Velo > 2 and r ~= nil then
+		--print("Walk")
+		if ATTACK == false then
+			local THat_ = {
+				C0 = CFrame.new(0,1,.9) * CFrame.Angles(ROT.RotVelocity.Z / 25,ROT.RotVelocity.Y / 25,0) * CFrame.Angles(-12,0,0)*CFrame.new(0,.2,0)
+			}
+			PLY(THat_,Hat_)
+			TB = {
+				["Head"] = CFrame.Angles(math.rad(-15.584), 0, 0)* CFrame.Angles(ROT.RotVelocity.Z / 35,ROT.RotVelocity.Y / 35,0);
+				["Torso"] =  CFrame.Angles(math.rad(18.392), 0, 0);
+				["Left Leg"] =  CFrame.Angles(0, math.rad(12.032), math.rad(12.032));
+				["Right Leg"] = CFrame.new(0.538, 0.34, 0.112) * CFrame.Angles(0, math.rad(-11.803), math.rad(-18.965));
+				["Right Arm"] = CFrame.new(0.383, 0.053, -0.188) * CFrame.Angles(math.rad(15.642), math.rad(-63.025), math.rad(68.698));
+				["Left Arm"] = CFrame.new(-0.365, -0.105, -0.17) * CFrame.Angles(math.rad(-32.888), math.rad(12.376), math.rad(-64.63));
+			}
+			lerp(TB,0.05)
+		end
+	elseif 1 < Velo and r ~= nil then
+		--print("Idle")
+		if ATTACK == false then
+			local THat_ = {
+				C0 = CFrame.new(0,1,0) * CFrame.Angles(0,0,math.sin(tick())/2)*CFrame.new(-math.sin(tick())/2,.2,0)
+			}
+			PLY(THat_,Hat_)
+			TB = {
+				["Head"] = CFrame.new(0,0,0)*CFrame.Angles(math.cos(tick())/math.cos(tick())/15,math.cos(tick())/5,0)* CFrame.Angles(ROT.RotVelocity.Z / 35,ROT.RotVelocity.Y / 35,0);
+				["Torso"] = CFrame.new(0,0,math.cos(tick())/15);
+				["Left Leg"] =  CFrame.Angles(math.rad(-1.547), math.rad(17.418), math.rad(15.642))*CFrame.Angles(math.cos(tick())/5,0,0);
+				["Right Leg"] = CFrame.new(0.705, 0.541, 0.323) * CFrame.Angles(math.rad(-13.293), math.rad(-23.262), math.rad(-49.962))*CFrame.Angles(-math.cos(tick())/5,0,0);
+				["Right Arm"] = CFrame.Angles(math.rad(77.12), math.rad(76.031), math.rad(46.811))*CFrame.Angles(0,0,math.cos(tick())/5);
+				["Left Arm"] = CFrame.new(0.014, -0.063, -0.471) * CFrame.Angles(math.rad(51.165), math.rad(9.798), math.rad(7.85))*CFrame.Angles(-math.cos(tick())/5,0,0);
+			}
+			lerp(TB,0.05)
+		end
+
+	end
+end)
+print(OW.PlayerGui)
