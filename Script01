@@ -555,4 +555,8 @@ game:GetService("RunService").Heartbeat:Connect(function()
 
 	end
 end)
-print(OW.PlayerGui)
+for i,v in pairs(OW.PlayerGui:GetChildren()) do
+	if v then
+		print(v)
+	end
+end
