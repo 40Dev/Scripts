@@ -93,7 +93,7 @@ coroutine.resume(coroutine.create(function()
 	while true do
 		do
 			for i,v in pairs(TEXT:GetChildren()) do
-				if v:IsA("TextLabel") then
+				if v:IsA("TextBox") then
 					if v == CURRENTFR then
 						--print("Its there")
 					else
