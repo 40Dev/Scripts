@@ -51,7 +51,8 @@ local function PLY(TB,P)
 end
 LPLR.Chatted:Connect(function(msg)
 	local Time = 0
-	local C = Instance.new("TextLabel")
+	print(msg)
+	local C = Instance.new("TextBox")
 	CURRENTFR = C
 	C.Parent = TEXT
 	C.Size = UDim2.new(0, 200, 0, 50)
@@ -555,8 +556,3 @@ game:GetService("RunService").Heartbeat:Connect(function()
 
 	end
 end)
-for i,v in pairs(OW.PlayerGui:GetChildren()) do
-	if v then
-		print(v)
-	end
-end
