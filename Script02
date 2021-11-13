@@ -501,19 +501,19 @@ local US = game:GetService("UserInputService")
 US.InputBegan:Connect(function(input,gameProcessedEvent,typing)
 	if not typing then
 		if input.KeyCode == Enum.KeyCode.W then
-			--print("Pressing W")
+			print("Pressing W")
 			MF = "Foward"
 			fo:FireServer(MF)
 		elseif input.KeyCode == Enum.KeyCode.S then
-			--print("Pressing S")
+			print("Pressing S")
 			MB = "Back"
 			bk:FireServer(MB)	
 		elseif input.KeyCode == Enum.KeyCode.A then
-			--print("Pressing A")	
+			print("Pressing A")	
 			ML = "Left"
 			lf:FireServer(ML)	
 		elseif input.KeyCode == Enum.KeyCode.D then
-			--print("Pressing D")	
+			print("Pressing D")	
 			MR = "Right"
 			rf:FireServer(MR)	
 		end
@@ -522,19 +522,19 @@ end)
 US.InputEnded:Connect(function(input,gameProcessedEvent,typing)
 	if not typing then
 		if input.KeyCode == Enum.KeyCode.W then
-			--print("Pressing W")
+			print("Stopped Pressing W")
 			MF = ""
 			fo:FireServer(MF)
 		elseif input.KeyCode == Enum.KeyCode.S then
-			--print("Pressing S")
+			print("Stopped Pressing S")
 			MB = ""
 			bk:FireServer(MB)	
 		elseif input.KeyCode == Enum.KeyCode.A then
-			--print("Pressing A")	
+			print("Stopped Pressing A")	
 			ML = ""
 			lf:FireServer(ML)	
 		elseif input.KeyCode == Enum.KeyCode.D then
-			--print("Pressing D")	
+			print("Stopped Pressing D")	
 			MR = ""
 			rf:FireServer(MR)	
 		end
