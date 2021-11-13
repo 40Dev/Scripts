@@ -419,7 +419,7 @@ for i,v in pairs(FCH:GetChildren()) do
 		v:Remove()
 	end
 end
-
+print(Ani)
 local Move = Instance.new("RemoteEvent",FCH)
 Move.Name = "Move"
 local Animation = Instance.new("RemoteEvent",FCH)
@@ -457,14 +457,16 @@ local aa = CH:WaitForChild("LL_")
 
 local FCH = CH
 local Ani = FCH["Ani"].Value
+wait(.1)
 local HD = CH["Head"]
 local TS = CH["Torso"]
 local LA = CH["Left Arm"]
 local RA = CH["Right Arm"]
 local RG = CH["Right Leg"]
 local LG = CH["Left Leg"]
-pcall(function()
-	local RootHipWeld = Instance.new("Weld")
+local ROT = CH["HumanoidRootPart"]
+print(Ani)
+local RootHipWeld = Instance.new("Weld")
 	RootHipWeld.Parent = FCH.HumanoidRootPart
 	RootHipWeld.Part0 = FCH.HumanoidRootPart
 	RootHipWeld.Part1 = FCH.Torso
@@ -570,7 +572,6 @@ pcall(function()
 			lerp(TB,0.05)
 		end
 	end)
-end)
 	]==],LPLR.PlayerGui)
 end))
 --TS.Material = "SmoothPlastic"
