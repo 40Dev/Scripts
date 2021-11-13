@@ -530,42 +530,7 @@ pcall(function()
 			end
 		end)
 	end
-	coroutine.resume(coroutine.create(function()
-		while true do
-			local mp = math.random(1,20)
-
-			if mp == math.random(1,20) then
-				local t = {
-					["Head"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
-					["Torso"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50))); --x,z,y
-					["Left Leg"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
-					["Right Leg"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
-					["Left Arm"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
-					["Right Arm"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
-				}
-
-				if t["Torso"] ~= nil then
-					RootHipWeld.C0 = RootHipWeld.C0:Lerp(CH.HumanoidRootPart.RootJoint.C0 * t["Torso"],.2)
-				end
-				if t["Right Arm"] ~= nil then
-					RightArmWeld.C0 = RightArmWeld.C0:Lerp(CH.Torso["Right Shoulder"].C0 * t["Right Arm"],.2)
-				end
-				if t["Right Leg"] ~= nil then
-					RightLegWeld.C0 = RightLegWeld.C0:Lerp(CH.Torso["Right Hip"].C0 * t["Right Leg"],.2)
-				end
-				if t["Left Arm"] ~= nil then
-					LeftArmWeld.C0 = LeftArmWeld.C0:Lerp(CH.Torso["Left Shoulder"].C0 * t["Left Arm"],.2)
-				end
-				if t["Left Leg"] ~= nil then
-					LeftLegWeld.C0 = LeftLegWeld.C0:Lerp(CH.Torso["Left Hip"].C0 * t["Left Leg"],.2)
-				end
-				if t["Head"] ~= nil then
-					Neck.C0 = Neck.C0:Lerp(CH.Torso.Neck.C0 * t["Head"],.2)
-				end
-			end
-			wait()
-		end
-	end))
+	
 	local TB = {
 		
 	}
