@@ -462,19 +462,19 @@ end)
 Forward_.OnServerEvent:Connect(function(player,MFz)
 	MF = MFz
 end)
-coroutine.resume(coroutine.create(function()
-	RUN.Heartbeat:Connect(function()
-		if MF == "Forward" then
-			core.CFrame = core.CFrame * CFrame.new(0,0,-1)
-		elseif MB == "Back" then
-			core.CFrame = core.CFrame * CFrame.new(0,0,1)	
-		elseif ML == "Left" then
-			core.CFrame = core.CFrame * CFrame.new(-1,0,0)
-		elseif MR == "Right" then
-			core.CFrame = core.CFrame * CFrame.new(1,0,0)
-		end
-	end)
-end))
+--coroutine.resume(coroutine.create(function()
+--	RUN.Heartbeat:Connect(function()
+--		if MF == "Forward" then
+--			core.CFrame = core.CFrame * CFrame.new(0,0,-1)
+--		elseif MB == "Back" then
+--			core.CFrame = core.CFrame * CFrame.new(0,0,1)	
+--		elseif ML == "Left" then
+--			core.CFrame = core.CFrame * CFrame.new(-1,0,0)
+--		elseif MR == "Right" then
+--			core.CFrame = core.CFrame * CFrame.new(1,0,0)
+--		end
+--	end)
+--end))
 
 coroutine.resume(coroutine.create(function()
 	
@@ -519,6 +519,7 @@ US.InputBegan:Connect(function(input,gameProcessedEvent,typing)
 		end
 	end
 end)
+
 US.InputEnded:Connect(function(input,gameProcessedEvent,typing)
 	if not typing then
 		if input.KeyCode == Enum.KeyCode.W then
