@@ -451,7 +451,7 @@ Animation.OnServerEvent:Connect(function(player,Ani)
 	end
 end)
 Left_.OnServerEvent:Connect(function(player,MLz)
-	ML = MLz
+	MLz = MLz
 end)
 Right_.OnServerEvent:Connect(function(player,MRz)
 	MR = MRz
@@ -492,55 +492,10 @@ local Ani = "Idle"
 wait(.1)
 
 local aa = FCH:WaitForChild("LL_")
-local lf = FCH:WaitForChild("Left")
-local rf = FCH:WaitForChild("Right")
-local bk = FCH:WaitForChild("Back")
-local fo = FCH:WaitForChild("Foward")
-
-local US = game:GetService("UserInputService")
-US.InputBegan:Connect(function(input,gameProcessedEvent,typing)
-	if not typing then
-		if input.KeyCode == Enum.KeyCode.W then
-			print("Pressing W")
-			MF = "Foward"
-			fo:FireServer(MF)
-		elseif input.KeyCode == Enum.KeyCode.S then
-			print("Pressing S")
-			MB = "Back"
-			bk:FireServer(MB)	
-		elseif input.KeyCode == Enum.KeyCode.A then
-			print("Pressing A")	
-			ML = "Left"
-			lf:FireServer(ML)	
-		elseif input.KeyCode == Enum.KeyCode.D then
-			print("Pressing D")	
-			MR = "Right"
-			rf:FireServer(MR)	
-		end
-	end
-end)
-
-US.InputEnded:Connect(function(input,gameProcessedEvent,typing)
-	if not typing then
-		if input.KeyCode == Enum.KeyCode.W then
-			print("Stopped Pressing W")
-			MF = ""
-			fo:FireServer(MF)
-		elseif input.KeyCode == Enum.KeyCode.S then
-			print("Stopped Pressing S")
-			MB = ""
-			bk:FireServer(MB)	
-		elseif input.KeyCode == Enum.KeyCode.A then
-			print("Stopped Pressing A")	
-			ML = ""
-			lf:FireServer(ML)	
-		elseif input.KeyCode == Enum.KeyCode.D then
-			print("Stopped Pressing D")	
-			MR = ""
-			rf:FireServer(MR)	
-		end
-	end
-end)
+local lf = FCH:WaitForChild("Move")
+local rf = FCH:WaitForChild("Move")
+local bk = FCH:WaitForChild("Move")
+local fo = FCH:WaitForChild("Move")
 
 print(aa)
 local HD = FCH["Head"]
@@ -555,6 +510,51 @@ local Cam = workspace.CurrentCamera
 Cam.Focus = HD.CFrame
 Cam.CameraSubject = HD
 Cam.CameraType = "Track"
+
+local US = game:GetService("UserInputService")
+US.InputBegan:Connect(function(input,gameProcessedEvent,typing)
+	if not typing then
+		if input.KeyCode == Enum.KeyCode.W then
+			--print("Pressing W")
+			MF = "Foward"
+			fo:FireServer(MF)
+		elseif input.KeyCode == Enum.KeyCode.S then
+			--print("Pressing S")
+			MB = "Back"
+			bk:FireServer(MB)	
+		elseif input.KeyCode == Enum.KeyCode.A then
+			--print("Pressing A")	
+			ML = "Left"
+			lf:FireServer(ML)	
+		elseif input.KeyCode == Enum.KeyCode.D then
+			--print("Pressing D")	
+			MR = "Right"
+			rf:FireServer(MR)	
+		end
+	end
+end)
+
+US.InputEnded:Connect(function(input,gameProcessedEvent,typing)
+	if not typing then
+		if input.KeyCode == Enum.KeyCode.W then
+			--print("Pressing W")
+			MF = ""
+			fo:FireServer(MF)
+		elseif input.KeyCode == Enum.KeyCode.S then
+			--print("Pressing S")
+			MB = ""
+			bk:FireServer(MB)	
+		elseif input.KeyCode == Enum.KeyCode.A then
+			--print("Pressing A")	
+			ML = ""
+			lf:FireServer(ML)	
+		elseif input.KeyCode == Enum.KeyCode.D then
+			--print("Pressing D")	
+			MR = ""
+			rf:FireServer(MR)	
+		end
+	end
+end)
 local RootHipWeld = Instance.new("Weld")
 	RootHipWeld.Parent = FCH.HumanoidRootPart
 	RootHipWeld.Part0 = FCH.HumanoidRootPart
