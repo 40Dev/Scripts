@@ -456,7 +456,8 @@ local CH = workspace[ow.Name.."_"]
 local aa = CH:WaitForChild("LL_")
 
 local FCH = CH
-local Ani = FCH["Ani"].Value
+wait(.1)
+local Ani = FCH:WaitForChild("Ani").Value
 wait(.1)
 local HD = CH["Head"]
 local TS = CH["Torso"]
