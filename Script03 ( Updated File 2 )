@@ -485,21 +485,21 @@ local US = game:GetService("UserInputService")
 US.InputBegan:Connect(function(input,gameProcessedEvent)
 	if gameProcessedEvent == true then
 		if input.KeyCode == Enum.KeyCode.W then
-			print("Pressing W")
-			Mm = "Foward"
+			--print("Pressing W")
+			--Mm = "Foward"
 			fo:FireServer(Mm)
 		elseif input.KeyCode == Enum.KeyCode.S then
 			print("Pressing S")
-			Mm = "Back"
-			bk:FireServer(Mm)	
+			--Mm = "Back"
+			--bk:FireServer(Mm)	
 		elseif input.KeyCode == Enum.KeyCode.A then
 			print("Pressing A")	
-			Mm = "Left"
-			lf:FireServer(Mm)	
+			--Mm = "Left"
+			--lf:FireServer(Mm)	
 		elseif input.KeyCode == Enum.KeyCode.D then
 			print("Pressing D")	
-			Mm = "Right"
-			rf:FireServer(Mm)	
+			--Mm = "Right"
+			--rf:FireServer(Mm)	
 		end
 	end
 end)
