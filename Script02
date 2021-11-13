@@ -418,6 +418,40 @@ end
 --print(Ani)
 local Move = Instance.new("RemoteEvent",FCH)
 Move.Name = "Move"
+local Forward_ = Instance.new("RemoteEvent",FCH)
+local Back_ = Instance.new("RemoteEvent",FCH)
+local Left_ = Instance.new("RemoteEvent",FCH)
+local Right_ = Instance.new("RemoteEvent",FCH)
+Forward_.Name = "Forward"
+Back_.Name = "Back"
+Left_.Name = "Left"
+Right_.Name = "Right"
+Left_.OnServerEvent:Connect(function(player,MLz)
+	ML = MLz
+end)
+Right_.OnServerEvent:Connect(function(player,MRz)
+	MR = MRz
+end)
+Back_.OnServerEvent:Connect(function(player,MBz)
+	MB = MBz
+end)
+Forward_.OnServerEvent:Connect(function(player,MFz)
+	MF = MFz
+end)
+coroutine.resume(coroutine.create(function()
+	RUN.Heartbeat:Connect(function()
+		if MF == "Forward" then
+			core.CFrame = core.CFrame * CFrame.new(0,0,-1)
+		elseif MB == "Back" then
+			core.CFrame = core.CFrame * CFrame.new(0,0,1)	
+		elseif ML == "Left" then
+			core.CFrame = core.CFrame * CFrame.new(-1,0,0)
+		elseif MR == "Right" then
+			core.CFrame = core.CFrame * CFrame.new(1,0,0)
+		end
+	end)
+end))
+
 local Animation = Instance.new("RemoteEvent",FCH)
 Animation.Name = "LL_"
 Animation.OnServerEvent:Connect(function(player,Ani)
@@ -460,6 +494,10 @@ wait(.1)
 
 local aa = FCH:WaitForChild("LL_")
 local move = FCH:WaitForChild("Move")
+local lf = FCH:WaitForChild("Left")
+local rf = FCH:WaitForChild("Right")
+local bk = FCH:WaitForChild("Back")
+local fo = FCH:WaitForChild("Foward")
 
 print(aa)
 local HD = FCH["Head"]
@@ -479,20 +517,20 @@ US.InputBegan:Connect(function(input,gameProcessedEvent)
 	if gameProcessedEvent == true then
 		if input.KeyCode == Enum.KeyCode.W then
 			print("Pressing W")
-			--Mm = "Foward"
-			--move:FireServer(Mm)
+			Mm = "Foward"
+			fo:FireServer(Mm)
 		elseif input.KeyCode == Enum.KeyCode.S then
 			print("Pressing S")
-			--Mm = "Back"
-			--move:FireServer(Mm)	
+			Mm = "Back"
+			bk:FireServer(Mm)	
 		elseif input.KeyCode == Enum.KeyCode.A then
 			print("Pressing A")	
-			--Mm = "Left"
-			--move:FireServer(Mm)	
+			Mm = "Left"
+			lf:FireServer(Mm)	
 		elseif input.KeyCode == Enum.KeyCode.D then
 			print("Pressing D")	
-			--Mm = "Right"
-			--move:FireServer(Mm)	
+			Mm = "Right"
+			rf:FireServer(Mm)	
 		end
 	end
 end)
