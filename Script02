@@ -36,18 +36,18 @@ local function nilz(c)
 			--print(FILL[i])
 		end
 	end
-
+	
 	local Mod = Instance.new("Model",script)
 	local Humanoid = Instance.new("Folder",Mod)
 	CurrentModel = Mod
 	Mod.Name = c.Name
-
+	
 	for i = 0,#FILL do
 
 		local OB = FILL[i]
 		wait()
 		local B = OB:Clone()
-
+			
 		if OB:IsA("Part") or OB:IsA("MeshPart") then
 			if B.Name == "Torso" or "HumanoidRootPart" then
 				for p,z in pairs(B:GetChildren()) do
@@ -55,7 +55,7 @@ local function nilz(c)
 						--print(p,z)
 						if z:IsA("Sound") then
 						else
-
+							
 							z.Enabled = false
 						end
 					end
@@ -78,7 +78,7 @@ local function nilz(c)
 				B.Position = POS
 				B.Color = OB.Color
 			end
-
+			
 		elseif OB:IsA("Tool") then
 			for p,z in pairs(OB:GetChildren()) do
 				if z:IsA("Part") then
@@ -104,7 +104,7 @@ local function nilz(c)
 		elseif OB:IsA("CharacterMesh") then
 			B.Parent = Mod
 			print(B)
-
+		
 		end
 	end 
 end
@@ -222,8 +222,8 @@ for i,v in pairs(FCH:GetChildren()) do
 			sp.Scale = Vector3.new(2,2,1)
 
 		else
-
-
+			
+		
 			local sp = Instance.new("SpecialMesh",v)
 			sp.MeshId = "rbxassetid://4461455651"
 			sp.Scale = Vector3.new(1,2,1)
@@ -359,8 +359,8 @@ local function FLY(p)
 
 		lok = false
 	end
-
-
+	
+	
 end
 local Pos = Instance.new("CFrameValue")
 
@@ -396,12 +396,12 @@ end
 
 coroutine.resume(coroutine.create(function()
 	while true do
-
+		
 		TS.Position = ROT.Position
-
+		
 		--TS.Orientation = ROT.Orientation
 		ROT.Position = core.Position
-
+		
 		wait()
 		task.wait()
 	end
@@ -416,14 +416,8 @@ for i,v in pairs(FCH:GetChildren()) do
 	end
 end
 --print(Ani)
-local Forward_ = Instance.new("RemoteEvent",FCH)
-local Back_ = Instance.new("RemoteEvent",FCH)
-local Left_ = Instance.new("RemoteEvent",FCH)
-local Right_ = Instance.new("RemoteEvent",FCH)
-Forward_.Name = "Forward"
-Back_.Name = "Back"
-Left_.Name = "Left"
-Right_.Name = "Right"
+local Move = Instance.new("RemoteEvent",FCH)
+Move.Name = "Move"
 local Animation = Instance.new("RemoteEvent",FCH)
 Animation.Name = "LL_"
 Animation.OnServerEvent:Connect(function(player,Ani)
@@ -450,52 +444,22 @@ Animation.OnServerEvent:Connect(function(player,Ani)
 		lerp(TB,0.05)
 	end
 end)
-Left_.OnServerEvent:Connect(function(player,MLz)
-	MLz = MLz
-end)
-Right_.OnServerEvent:Connect(function(player,MRz)
-	MR = MRz
-end)
-Back_.OnServerEvent:Connect(function(player,MBz)
-	MB = MBz
-end)
-Forward_.OnServerEvent:Connect(function(player,MFz)
-	MF = MFz
-end)
---coroutine.resume(coroutine.create(function()
---	RUN.Heartbeat:Connect(function()
---		if MF == "Forward" then
---			core.CFrame = core.CFrame * CFrame.new(0,0,-1)
---		elseif MB == "Back" then
---			core.CFrame = core.CFrame * CFrame.new(0,0,1)	
---		elseif ML == "Left" then
---			core.CFrame = core.CFrame * CFrame.new(-1,0,0)
---		elseif MR == "Right" then
---			core.CFrame = core.CFrame * CFrame.new(1,0,0)
---		end
---	end)
---end))
+
 
 coroutine.resume(coroutine.create(function()
-
+	
 	NLS([==[
 local ow = owner
 local CH = workspace[ow.Name.."_"]
 
 local FCH = CH
 wait(.1)
-local MF = ""
-local MB = ""
-local ML = ""
-local MR = ""
+local Mm = ""
 local Ani = "Idle"
 wait(.1)
 
 local aa = FCH:WaitForChild("LL_")
-local lf = FCH:WaitForChild("Foward")
-local rf = FCH:WaitForChild("Back")
-local bk = FCH:WaitForChild("Left")
-local fo = FCH:WaitForChild("Right")
+local move = FCH:WaitForChild("Move")
 
 print(aa)
 local HD = FCH["Head"]
@@ -510,30 +474,28 @@ local Cam = workspace.CurrentCamera
 Cam.Focus = HD.CFrame
 Cam.CameraSubject = HD
 Cam.CameraType = "Track"
-
 local US = game:GetService("UserInputService")
 US.InputBegan:Connect(function(input,gameProcessedEvent)
 	if gameProcessedEvent == true then
 		if input.KeyCode == Enum.KeyCode.W then
-			--print("Pressing W")
-			MF = "Foward"
-			fo:FireServer(MF)
+			print("Pressing W")
+			--Mm = "Foward"
+			--move:FireServer(Mm)
 		elseif input.KeyCode == Enum.KeyCode.S then
-			--print("Pressing S")
-			MB = "Back"
-			bk:FireServer(MB)	
+			print("Pressing S")
+			--Mm = "Back"
+			--move:FireServer(Mm)	
 		elseif input.KeyCode == Enum.KeyCode.A then
-			--print("Pressing A")	
-			ML = "Left"
-			lf:FireServer(ML)	
+			print("Pressing A")	
+			--Mm = "Left"
+			--move:FireServer(Mm)	
 		elseif input.KeyCode == Enum.KeyCode.D then
-			--print("Pressing D")	
-			MR = "Right"
-			rf:FireServer(MR)	
+			print("Pressing D")	
+			--Mm = "Right"
+			--move:FireServer(Mm)	
 		end
 	end
 end)
-
 local RootHipWeld = Instance.new("Weld")
 	RootHipWeld.Parent = FCH.HumanoidRootPart
 	RootHipWeld.Part0 = FCH.HumanoidRootPart
@@ -647,7 +609,7 @@ end))
 coroutine.resume(coroutine.create(function()
 	while true do
 		local mp = math.random(1,20)
-
+		
 		if mp == math.random(1,20) then
 			local t = {
 				["Head"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
@@ -657,7 +619,7 @@ coroutine.resume(coroutine.create(function()
 				["Left Arm"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
 				["Right Arm"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
 			}
-
+			
 			if t["Torso"] ~= nil then
 				RootHipWeld.C0 = RootHipWeld.C0:Lerp(CH.HumanoidRootPart.RootJoint.C0 * t["Torso"],.2)
 			end
@@ -683,6 +645,6 @@ end))
 --Ani = "Walk"
 --coroutine.resume(coroutine.create(function()
 --	game:GetService("RunService").Heartbeat:Connect(function()
-
+		
 --	end)
---end))-
+--end))
