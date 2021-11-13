@@ -453,9 +453,7 @@ Back_.Name = "Back"
 Left_.Name = "Left"
 Right_.Name = "Right"
 
-coroutine.resume(coroutine.create(function()
-	
-	NLS([==[
+NLS([==[
 local ow = owner
 local CH = workspace[ow.Name.."_"]
 
@@ -613,9 +611,8 @@ local RootHipWeld = Instance.new("Weld")
 			lerp(TB,0.05)
 		end
 	wait()
-    end
-	]==],LPLR.PlayerGui)
-end))
+end
+]==],LPLR.PlayerGui) --
 --TS.Material = "SmoothPlastic"
 coroutine.resume(coroutine.create(function()
 	while true do
