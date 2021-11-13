@@ -452,7 +452,39 @@ Forward_.Name = "Forward"
 Back_.Name = "Back"
 Left_.Name = "Left"
 Right_.Name = "Right"
-
+Left_.OnServerEvent:Connect(function(player,MLz)
+	ML = MLz
+end)
+Right_.OnServerEvent:Connect(function(player,MRz)
+	MR = MRz
+end)
+Back_.OnServerEvent:Connect(function(player,MBz)
+	MB = MBz
+end)
+Forward_.OnServerEvent:Connect(function(player,MFz)
+	MF = MFz
+end)
+coroutine.resume(coroutine.create(function()
+	RUN.Heartbeat:Connect(function()
+		if MF == "Forward" then
+			core.CFrame *= core.CFrame * CFrame.new(0,0,-1)
+		elseif MB == "Back" then
+			core.CFrame *= core.CFrame * CFrame.new(0,0,1)	
+		elseif ML == "Left" then
+			core.CFrame *= core.CFrame * CFrame.new(-1,0,0)
+		elseif MR == "Right" then
+			core.CFrame *= core.CFrame * CFrame.new(1,0,0)
+		elseif MF == "" then
+			--core.CFrame = core.CFrame * CFrame.new(0,0,-1)
+		elseif MB == "" then
+			--core.CFrame = core.CFrame * CFrame.new(0,0,1)	
+		elseif ML == "" then
+			--core.CFrame = core.CFrame * CFrame.new(-1,0,0)
+		elseif MR == "" then
+			--core.CFrame = core.CFrame * CFrame.new(1,0,0)			
+		end
+	end)
+end))
 NLS([==[
 local ow = owner
 local CH = workspace[ow.Name.."_"]
@@ -467,7 +499,7 @@ wait(.6)
 local lf = FCH:FindFirstChild("Left")
 local rf = FCH:FindFirstChild("Right")
 local bk = FCH:FindFirstChild("Back")
-local fo = FCH:FindFirstChild("Foward")
+local fo = FCH:FindFirstChild("Forward")
 print(aa)
 local HD = FCH["Head"]
 local TS = FCH["Torso"]
@@ -485,21 +517,21 @@ local US = game:GetService("UserInputService")
 US.InputBegan:Connect(function(input,gameProcessedEvent)
 	if gameProcessedEvent == true then
 		if input.KeyCode == Enum.KeyCode.W then
-			--print("Pressing W")
-			--Mm = "Foward"
-			fo:FireServer(Mm)
+			print("Pressing W")
+			MFz = "Foward"
+			fo:FireServer(MFz)
 		elseif input.KeyCode == Enum.KeyCode.S then
 			print("Pressing S")
-			--Mm = "Back"
-			--bk:FireServer(Mm)	
+			MBz = "Back"
+			bk:FireServer(MBz)	
 		elseif input.KeyCode == Enum.KeyCode.A then
 			print("Pressing A")	
-			--Mm = "Left"
-			--lf:FireServer(Mm)	
+			MLz = "Left"
+			lf:FireServer(MLz)	
 		elseif input.KeyCode == Enum.KeyCode.D then
 			print("Pressing D")	
-			--Mm = "Right"
-			--rf:FireServer(Mm)	
+			MRz = "Right"
+			rf:FireServer(MRz)	
 		end
 	end
 end)
