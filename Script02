@@ -120,7 +120,7 @@ local vec2 = Vector2.new
 --BloxyKing0
 -- (Donkey Music. (390270143))
 -- (Neat music (1))
-local list = {"ScandalousSolution"}
+local list = {"BloxyKing0"}
 local part = nil
 local mod = nil
 for i,v in pairs(workspace:GetChildren()) do
@@ -444,6 +444,8 @@ Animation.OnServerEvent:Connect(function(player,Ani)
 		lerp(TB,0.05)
 	end
 end)
+local US = game:GetService("UserInputService")
+
 coroutine.resume(coroutine.create(function()
 	
 	NLS([==[
@@ -452,9 +454,11 @@ local CH = workspace[ow.Name.."_"]
 
 local FCH = CH
 wait(.1)
+local Mm = ""
 local Ani = "Idle"
 wait(.1)
 local aa = FCH:WaitForChild("LL_")
+local move = FCH:WaitForChild("Move")
 print(aa)
 local HD = FCH["Head"]
 local TS = FCH["Torso"]
@@ -464,6 +468,9 @@ local RG = FCH["Right Leg"]
 local LG = FCH["Left Leg"]
 local ROT = FCH["HumanoidRootPart"]
 print(Ani) print(CH)
+local Cam = workspace.CurrentCamera
+Cam.Focus = HD.CFrame
+Cam.CameraType = "Track"
 local RootHipWeld = Instance.new("Weld")
 	RootHipWeld.Parent = FCH.HumanoidRootPart
 	RootHipWeld.Part0 = FCH.HumanoidRootPart
