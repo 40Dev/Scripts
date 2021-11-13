@@ -255,9 +255,7 @@ end
 local function PLAY(tab,SERVIz,part)
 	TWEEN:Create(part,SERVIz,tab):Play()
 end
-local Aniz = Instance.new("StringValue",FCH)
-Aniz.Name = "Ani"
-Ani = Aniz.Value
+
 local Attacking = false
 --rbxassetid://6011135205
 
@@ -352,13 +350,11 @@ local function FLY(p)
 		PLAY(GoTo,Service,look)
 		for i = 0,SERVI.Time * 1.9,SERVI.Time/100*SERVI.Time * 2 do
 			wait()
-			Ani = "Walk"
 			part = p
 			local s = {
 				CFrame = p.CFrame * core.CFrame:Lerp(p.CFrame * CFrame.new(0,0,5),i)
 			}
 			PLAY(s,SERVI,core)
-			Ani = "Idle"	
 		end
 
 		lok = false
@@ -367,7 +363,7 @@ local function FLY(p)
 	
 end
 local Pos = Instance.new("CFrameValue")
-Ani = "Idle"
+
 Pos.Value = CFrame.new(0,3,0)
 local Move = Instance.new("RemoteEvent",FCH)
 
@@ -424,7 +420,7 @@ local Move = Instance.new("RemoteEvent",FCH)
 Move.Name = "Move"
 local Animation = Instance.new("RemoteEvent",FCH)
 Animation.Name = "LL_"
-Animation.OnServerEvent:Connect(function(player)
+Animation.OnServerEvent:Connect(function(player,Ani)
 	if Ani == "Idle" and Attacking == false then
 		TB = {
 			["Torso"] = CFrame.new(0,0,-.2)*CFrame.new(0,0,math.sin(5*tick())/29); --x,z,y
@@ -453,20 +449,21 @@ coroutine.resume(coroutine.create(function()
 	NLS([==[
 local ow = owner
 local CH = workspace[ow.Name.."_"]
-local aa = CH:WaitForChild("LL_")
 
 local FCH = CH
 wait(.1)
-local Ani = FCH:WaitForChild("Ani").Value
+local Ani = "Idle"
 wait(.1)
-local HD = CH["Head"]
-local TS = CH["Torso"]
-local LA = CH["Left Arm"]
-local RA = CH["Right Arm"]
-local RG = CH["Right Leg"]
-local LG = CH["Left Leg"]
-local ROT = CH["HumanoidRootPart"]
-print(Ani)
+local aa = FCH:WaitForChild("LL_")
+print(aa)
+local HD = FCH["Head"]
+local TS = FCH["Torso"]
+local LA = FCH["Left Arm"]
+local RA = FCH["Right Arm"]
+local RG = FCH["Right Leg"]
+local LG = FCH["Left Leg"]
+local ROT = FCH["HumanoidRootPart"]
+print(Ani) print(CH)
 local RootHipWeld = Instance.new("Weld")
 	RootHipWeld.Parent = FCH.HumanoidRootPart
 	RootHipWeld.Part0 = FCH.HumanoidRootPart
@@ -549,7 +546,7 @@ local RootHipWeld = Instance.new("Weld")
 	}
 	local Attacking = false
 	game:GetService("RunService").Heartbeat:Connect(function()
-		aa:FireServer()
+		aa:FireServer(Ani)
 		if Ani == "Idle" and Attacking == false then
 			TB = {
 				["Torso"] = CFrame.new(0,0,-.2)*CFrame.new(0,0,math.sin(5*tick())/29); --x,z,y
