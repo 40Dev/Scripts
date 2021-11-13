@@ -444,7 +444,7 @@ Animation.OnServerEvent:Connect(function(player,Ani)
 		lerp(TB,0.05)
 	end
 end)
-local US = game:GetService("UserInputService")
+
 
 coroutine.resume(coroutine.create(function()
 	
@@ -457,8 +457,23 @@ wait(.1)
 local Mm = ""
 local Ani = "Idle"
 wait(.1)
+
 local aa = FCH:WaitForChild("LL_")
 local move = FCH:WaitForChild("Move")
+local US = game:GetService("UserInputService")
+US.InputBegan:Connect(function(input,gameProcessedEvent,typing)
+	if not typing then
+		if input.KeyCode == Enum.KeyCode.W then
+			print("Pressing W")
+		elseif input.KeyCode == Enum.KeyCode.S then
+			print("Pressing S")
+		elseif input.KeyCode == Enum.KeyCode.A then
+			print("Pressing A")	
+		elseif input.KeyCode == Enum.KeyCode.D then
+			print("Pressing D")	
+		end
+	end
+end)
 print(aa)
 local HD = FCH["Head"]
 local TS = FCH["Torso"]
@@ -470,6 +485,7 @@ local ROT = FCH["HumanoidRootPart"]
 print(Ani) print(CH)
 local Cam = workspace.CurrentCamera
 Cam.Focus = HD.CFrame
+Cam.CameraSubject = HD
 Cam.CameraType = "Track"
 local RootHipWeld = Instance.new("Weld")
 	RootHipWeld.Parent = FCH.HumanoidRootPart
@@ -576,7 +592,7 @@ local RootHipWeld = Instance.new("Weld")
 
 			lerp(TB,0.05)
 		end
-	task.wait()
+	wait()
     end
 	]==],LPLR.PlayerGui)
 end))
