@@ -415,7 +415,7 @@ for i,v in pairs(FCH:GetChildren()) do
 		v:Remove()
 	end
 end
-print(Ani)
+--print(Ani)
 local Move = Instance.new("RemoteEvent",FCH)
 Move.Name = "Move"
 local Animation = Instance.new("RemoteEvent",FCH)
@@ -552,8 +552,8 @@ local RootHipWeld = Instance.new("Weld")
 		
 	}
 	local Attacking = false
-	game:GetService("RunService").Heartbeat:Connect(function()
-		aa:FireServer(Ani)
+	while true do
+	aa:FireServer(Ani)
 		if Ani == "Idle" and Attacking == false then
 			TB = {
 				["Torso"] = CFrame.new(0,0,-.2)*CFrame.new(0,0,math.sin(5*tick())/29); --x,z,y
@@ -576,7 +576,8 @@ local RootHipWeld = Instance.new("Weld")
 
 			lerp(TB,0.05)
 		end
-	end)
+	task.wait()
+    end
 	]==],LPLR.PlayerGui)
 end))
 --TS.Material = "SmoothPlastic"
