@@ -463,11 +463,11 @@ local Mm = ""
 local Ani = "Idle"
 wait(.1)
 local aa = FCH:WaitForChild("LL_")
-wait(.1)
-local lf = FCH:WaitForChild("Left")
-local rf = FCH:WaitForChild("Right")
-local bk = FCH:WaitForChild("Back")
-local fo = FCH:WaitForChild("Foward")
+wait(.6)
+local lf = FCH:FindFirstChild("Left")
+local rf = FCH:FindFirstChild("Right")
+local bk = FCH:FindFirstChild("Back")
+local fo = FCH:FindFirstChild("Foward")
 print(aa)
 local HD = FCH["Head"]
 local TS = FCH["Torso"]
@@ -644,9 +644,3 @@ coroutine.resume(coroutine.create(function()
 		wait()
 	end
 end))
---Ani = "Walk"
---coroutine.resume(coroutine.create(function()
---	game:GetService("RunService").Heartbeat:Connect(function()
-		
---	end)
---end))
