@@ -120,7 +120,7 @@ local vec2 = Vector2.new
 --BloxyKing0
 -- (Donkey Music. (390270143))
 -- (Neat music (1))
-local list = {"plr2525"}
+local list = {"ScandalousSolution"}
 local part = nil
 local mod = nil
 for i,v in pairs(workspace:GetChildren()) do
