@@ -451,122 +451,151 @@ end)
 coroutine.resume(coroutine.create(function()
 	
 	NLS([==[
-	local ow = owner
-	local ch = workspace[ow.Name.."_"]
-	local aa = ch:WaitForChild("LL_")
-	
-	local FCH = ch
-	local Ani = FCH["Ani"].Value
-	local HD = ch["Head"]
-	local TS = ch["Torso"]
-	local LA = ch["Left Arm"]
-	local RA = ch["Right Arm"]
-	local RG = ch["Right Leg"]
-	local LG = ch["Left Leg"]
-	pcall(function()
-		local RootHipWeld = Instance.new("Weld")
-		RootHipWeld.Parent = FCH.HumanoidRootPart
-		RootHipWeld.Part0 = FCH.HumanoidRootPart
-		RootHipWeld.Part1 = FCH.Torso
-		RootHipWeld.C0 = FCH.HumanoidRootPart.RootJoint.C0
-		RootHipWeld.C1 = FCH.HumanoidRootPart.RootJoint.C1
+local ow = owner
+local CH = workspace[ow.Name.."_"]
+local aa = CH:WaitForChild("LL_")
 
-		local RightArmWeld = Instance.new("Weld")
-		RightArmWeld.Parent = FCH.Torso
-		RightArmWeld.Part0 = FCH.Torso
-		RightArmWeld.Part1 = FCH["Right Arm"]
-		RightArmWeld.C0 = FCH.Torso["Right Shoulder"].C0
-		RightArmWeld.C1 = FCH.Torso["Right Shoulder"].C1
+local FCH = CH
+local Ani = FCH["Ani"].Value
+local HD = CH["Head"]
+local TS = CH["Torso"]
+local LA = CH["Left Arm"]
+local RA = CH["Right Arm"]
+local RG = CH["Right Leg"]
+local LG = CH["Left Leg"]
+pcall(function()
+	local RootHipWeld = Instance.new("Weld")
+	RootHipWeld.Parent = FCH.HumanoidRootPart
+	RootHipWeld.Part0 = FCH.HumanoidRootPart
+	RootHipWeld.Part1 = FCH.Torso
+	RootHipWeld.C0 = FCH.HumanoidRootPart.RootJoint.C0
+	RootHipWeld.C1 = FCH.HumanoidRootPart.RootJoint.C1
 
-		local LeftArmWeld = Instance.new("Weld")
-		LeftArmWeld.Parent = FCH.Torso
-		LeftArmWeld.Part0 = FCH.Torso
-		LeftArmWeld.Part1 = FCH["Left Arm"]
-		LeftArmWeld.C0 = FCH.Torso["Left Shoulder"].C0
-		LeftArmWeld.C1 = FCH.Torso["Left Shoulder"].C1
+	local RightArmWeld = Instance.new("Weld")
+	RightArmWeld.Parent = FCH.Torso
+	RightArmWeld.Part0 = FCH.Torso
+	RightArmWeld.Part1 = FCH["Right Arm"]
+	RightArmWeld.C0 = FCH.Torso["Right Shoulder"].C0
+	RightArmWeld.C1 = FCH.Torso["Right Shoulder"].C1
 
-		local RightLegWeld = Instance.new("Weld")
-		RightLegWeld.Parent = TS
-		RightLegWeld.Part0 = TS
-		RightLegWeld.Part1 = FCH["Right Leg"]
-		RightLegWeld.C0 = FCH.Torso["Right Hip"].C0
-		RightLegWeld.C1 = FCH.Torso["Right Hip"].C1
+	local LeftArmWeld = Instance.new("Weld")
+	LeftArmWeld.Parent = FCH.Torso
+	LeftArmWeld.Part0 = FCH.Torso
+	LeftArmWeld.Part1 = FCH["Left Arm"]
+	LeftArmWeld.C0 = FCH.Torso["Left Shoulder"].C0
+	LeftArmWeld.C1 = FCH.Torso["Left Shoulder"].C1
 
-		local LeftLegWeld = Instance.new("Weld")
-		LeftLegWeld.Parent = TS
-		LeftLegWeld.Part0 = TS
-		LeftLegWeld.Part1 = FCH["Left Leg"]
-		LeftLegWeld.C0 = FCH.Torso["Left Hip"].C0
-		LeftLegWeld.C1 = FCH.Torso["Left Hip"].C1
+	local RightLegWeld = Instance.new("Weld")
+	RightLegWeld.Parent = TS
+	RightLegWeld.Part0 = TS
+	RightLegWeld.Part1 = FCH["Right Leg"]
+	RightLegWeld.C0 = FCH.Torso["Right Hip"].C0
+	RightLegWeld.C1 = FCH.Torso["Right Hip"].C1
 
-		local Neck = Instance.new("Weld")
-		Neck.Parent = FCH.Torso
-		Neck.Part0 = FCH.Torso
-		Neck.Part1 = FCH.Head
-		Neck.C0 = FCH.Torso.Neck.C0
-		Neck.C1 = FCH.Torso.Neck.C1
-		coroutine.resume(coroutine.create(function()
-			while true do
-				local mp = math.random(1,20)
+	local LeftLegWeld = Instance.new("Weld")
+	LeftLegWeld.Parent = TS
+	LeftLegWeld.Part0 = TS
+	LeftLegWeld.Part1 = FCH["Left Leg"]
+	LeftLegWeld.C0 = FCH.Torso["Left Hip"].C0
+	LeftLegWeld.C1 = FCH.Torso["Left Hip"].C1
 
-				if mp == math.random(1,20) then
-					local t = {
-						["Head"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
-						["Torso"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50))); --x,z,y
-						["Left Leg"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
-						["Right Leg"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
-						["Left Arm"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
-						["Right Arm"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
-					}
-
-					if t["Torso"] ~= nil then
-						RootHipWeld.C0 = RootHipWeld.C0:Lerp(CH.HumanoidRootPart.RootJoint.C0 * t["Torso"],.2)
-					end
-					if t["Right Arm"] ~= nil then
-						RightArmWeld.C0 = RightArmWeld.C0:Lerp(CH.Torso["Right Shoulder"].C0 * t["Right Arm"],.2)
-					end
-					if t["Right Leg"] ~= nil then
-						RightLegWeld.C0 = RightLegWeld.C0:Lerp(CH.Torso["Right Hip"].C0 * t["Right Leg"],.2)
-					end
-					if t["Left Arm"] ~= nil then
-						LeftArmWeld.C0 = LeftArmWeld.C0:Lerp(CH.Torso["Left Shoulder"].C0 * t["Left Arm"],.2)
-					end
-					if t["Left Leg"] ~= nil then
-						LeftLegWeld.C0 = LeftLegWeld.C0:Lerp(CH.Torso["Left Hip"].C0 * t["Left Leg"],.2)
-					end
-					if t["Head"] ~= nil then
-						Neck.C0 = Neck.C0:Lerp(CH.Torso.Neck.C0 * t["Head"],.2)
-					end
+	local Neck = Instance.new("Weld")
+	Neck.Parent = FCH.Torso
+	Neck.Part0 = FCH.Torso
+	Neck.Part1 = FCH.Head
+	Neck.C0 = FCH.Torso.Neck.C0
+	Neck.C1 = FCH.Torso.Neck.C1
+	function lerp(t, f)
+		pcall(function()
+			for i = 0,1,f do
+				if t["Torso"] ~= nil then
+					RootHipWeld.C0 = RootHipWeld.C0:Lerp(CH.HumanoidRootPart.RootJoint.C0 * t["Torso"],i)
 				end
-				wait()
-			end
-		end))
-		game:GetService("RunService").Heartbeat:Connect(function()
-			aa:FireServer()
-			if Ani == "Idle" and Attacking == false then
-				TB = {
-					["Torso"] = CFrame.new(0,0,-.2)*CFrame.new(0,0,math.sin(5*tick())/29); --x,z,y
-					["Left Leg"] = CFrame.new(0,0,0)*CFrame.new(0,-math.sin(5*tick())/29,0);
-					["Right Leg"] = CFrame.new(0,0,0)*CFrame.new(0,-math.sin(5*tick())/29,0);
-					["Left Arm"] = CFrame.new(0,0,0)*CFrame.new(0,-math.sin(6*tick())/29,0);
-					["Right Arm"] = CFrame.new(0,0,0)*CFrame.new(0,-math.sin(6*tick())/29,0);
-				}
-				lerp(TB,0.05)
-			elseif Ani == "Walk" and Attacking == false then
-				TB = {
-					["Head"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(math.cos(10*tick())));
-					["Torso"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(math.cos(10*tick()))); --x,z,y
-					["Left Leg"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(42*-math.cos(10.7*tick())));
-					["Right Leg"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(42*-math.cos(10.7*tick())));
-					["Left Arm"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(42*math.cos(10.7*tick())));
-					["Right Arm"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(42*math.cos(10.7*tick())));
-
-				}
-
-				lerp(TB,0.05)
+				if t["Right Arm"] ~= nil then
+					RightArmWeld.C0 = RightArmWeld.C0:Lerp(CH.Torso["Right Shoulder"].C0 * t["Right Arm"], i)
+				end
+				if t["Right Leg"] ~= nil then
+					RightLegWeld.C0 = RightLegWeld.C0:Lerp(CH.Torso["Right Hip"].C0 * t["Right Leg"], i)
+				end
+				if t["Left Arm"] ~= nil then
+					LeftArmWeld.C0 = LeftArmWeld.C0:Lerp(CH.Torso["Left Shoulder"].C0 * t["Left Arm"], i)
+				end
+				if t["Left Leg"] ~= nil then
+					LeftLegWeld.C0 = LeftLegWeld.C0:Lerp(CH.Torso["Left Hip"].C0 * t["Left Leg"], i)
+				end
+				if t["Head"] ~= nil then
+					Neck.C0 = Neck.C0:Lerp(CH.Torso.Neck.C0 * t["Head"], i)
+				end
+				task.wait()
 			end
 		end)
+	end
+	coroutine.resume(coroutine.create(function()
+		while true do
+			local mp = math.random(1,20)
+
+			if mp == math.random(1,20) then
+				local t = {
+					["Head"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
+					["Torso"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50))); --x,z,y
+					["Left Leg"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
+					["Right Leg"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
+					["Left Arm"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
+					["Right Arm"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
+				}
+
+				if t["Torso"] ~= nil then
+					RootHipWeld.C0 = RootHipWeld.C0:Lerp(CH.HumanoidRootPart.RootJoint.C0 * t["Torso"],.2)
+				end
+				if t["Right Arm"] ~= nil then
+					RightArmWeld.C0 = RightArmWeld.C0:Lerp(CH.Torso["Right Shoulder"].C0 * t["Right Arm"],.2)
+				end
+				if t["Right Leg"] ~= nil then
+					RightLegWeld.C0 = RightLegWeld.C0:Lerp(CH.Torso["Right Hip"].C0 * t["Right Leg"],.2)
+				end
+				if t["Left Arm"] ~= nil then
+					LeftArmWeld.C0 = LeftArmWeld.C0:Lerp(CH.Torso["Left Shoulder"].C0 * t["Left Arm"],.2)
+				end
+				if t["Left Leg"] ~= nil then
+					LeftLegWeld.C0 = LeftLegWeld.C0:Lerp(CH.Torso["Left Hip"].C0 * t["Left Leg"],.2)
+				end
+				if t["Head"] ~= nil then
+					Neck.C0 = Neck.C0:Lerp(CH.Torso.Neck.C0 * t["Head"],.2)
+				end
+			end
+			wait()
+		end
+	end))
+	local TB = {
+		
+	}
+	local Attacking = false
+	game:GetService("RunService").Heartbeat:Connect(function()
+		aa:FireServer()
+		if Ani == "Idle" and Attacking == false then
+			TB = {
+				["Torso"] = CFrame.new(0,0,-.2)*CFrame.new(0,0,math.sin(5*tick())/29); --x,z,y
+				["Left Leg"] = CFrame.new(0,0,0)*CFrame.new(0,-math.sin(5*tick())/29,0);
+				["Right Leg"] = CFrame.new(0,0,0)*CFrame.new(0,-math.sin(5*tick())/29,0);
+				["Left Arm"] = CFrame.new(0,0,0)*CFrame.new(0,-math.sin(6*tick())/29,0);
+				["Right Arm"] = CFrame.new(0,0,0)*CFrame.new(0,-math.sin(6*tick())/29,0);
+			}
+			lerp(TB,0.05)
+		elseif Ani == "Walk" and Attacking == false then
+			TB = {
+				["Head"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(math.cos(10*tick())));
+				["Torso"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(math.cos(10*tick()))); --x,z,y
+				["Left Leg"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(42*-math.cos(10.7*tick())));
+				["Right Leg"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(42*-math.cos(10.7*tick())));
+				["Left Arm"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(42*math.cos(10.7*tick())));
+				["Right Arm"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(42*math.cos(10.7*tick())));
+
+			}
+
+			lerp(TB,0.05)
+		end
 	end)
+end)
 	]==],LPLR.PlayerGui)
 end))
 --TS.Material = "SmoothPlastic"
