@@ -524,7 +524,7 @@ Cam.CameraSubject = HD
 Cam.CameraType = "Track"
 local US = game:GetService("UserInputService")
 US.InputBegan:Connect(function(input,gameProcessedEvent)
-	if gameProcessedEvent == true then
+	if gameProcessedEvent == false then
 		if input.KeyCode == Enum.KeyCode.W then
 			print("Pressing W")
 			MFz = "Foward"
@@ -540,6 +540,27 @@ US.InputBegan:Connect(function(input,gameProcessedEvent)
 		elseif input.KeyCode == Enum.KeyCode.D then
 			print("Pressing D")	
 			MRz = "Right"
+			rf:FireServer(MRz)	
+		end
+	end
+end)
+US.InputEnded:Connect(function(input,gameProcessedEvent)
+	if gameProcessedEvent == false then
+		if input.KeyCode == Enum.KeyCode.W then
+			print("Pressing W")
+			MFz = ""
+			fo:FireServer(MFz)
+		elseif input.KeyCode == Enum.KeyCode.S then
+			print("Pressing S")
+			MBz = ""
+			bk:FireServer(MBz)	
+		elseif input.KeyCode == Enum.KeyCode.A then
+			print("Pressing A")	
+			MLz = ""
+			lf:FireServer(MLz)	
+		elseif input.KeyCode == Enum.KeyCode.D then
+			print("Pressing D")	
+			MRz = ""
 			rf:FireServer(MRz)	
 		end
 	end
