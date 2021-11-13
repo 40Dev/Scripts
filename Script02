@@ -492,10 +492,10 @@ local Ani = "Idle"
 wait(.1)
 
 local aa = FCH:WaitForChild("LL_")
-local lf = FCH:WaitForChild("Move")
-local rf = FCH:WaitForChild("Move")
-local bk = FCH:WaitForChild("Move")
-local fo = FCH:WaitForChild("Move")
+local lf = FCH:WaitForChild("Foward")
+local rf = FCH:WaitForChild("Back")
+local bk = FCH:WaitForChild("Left")
+local fo = FCH:WaitForChild("Right")
 
 print(aa)
 local HD = FCH["Head"]
