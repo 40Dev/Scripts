@@ -395,16 +395,18 @@ function lerp(t, f)
 end
 
 coroutine.resume(coroutine.create(function()
-	while true do
-		
-		TS.Position = ROT.Position
-		
-		--TS.Orientation = ROT.Orientation
-		ROT.Position = core.Position
-		
-		wait()
-		task.wait()
-	end
+	pcall(function()
+		while true do
+
+			TS.Position = ROT.Position
+
+			--TS.Orientation = ROT.Orientation
+			ROT.Position = core.Position
+
+			wait()
+			task.wait()
+		end
+	end)
 end))
 core.CFrame = CFrame.new(mod.Head.CFrame.X,3.025,mod.Head.CFrame.Z)
 for i,v in pairs(FCH:GetChildren()) do
@@ -452,48 +454,55 @@ Forward_.Name = "Forward"
 Back_.Name = "Back"
 Left_.Name = "Left"
 Right_.Name = "Right"
+local W = false
+local A = false
+local S = false
+local D = false
 Left_.OnServerEvent:Connect(function(player,MLz)
-	ML = MLz
-	print(ML)
+	if MLz == "Left" then
+		A = true
+	else
+		A = false
+	end
 end)
 Right_.OnServerEvent:Connect(function(player,MRz)
-	MR = MRz
-	print(MR)
+	if MRz == "Right" then
+		D = true
+	else
+		D = false
+	end	
 end)
 Back_.OnServerEvent:Connect(function(player,MBz)
-	MB = MBz
-	print(MB)
+	if MBz == "Back" then
+		S = true
+	else
+		S = false
+	end	
 end)
 Forward_.OnServerEvent:Connect(function(player,MFz)
-	MF = MFz
-	print(MF)
+	if MFz == "Foward" then
+		W = true
+	else
+		W = false
+	end	
 end)
---
+
 coroutine.resume(coroutine.create(function()
-	RUN.Heartbeat:Connect(function()
-		if MF == "Forward" then
-			print("for")
-			core.CFrame *= core.CFrame * CFrame.new(0,0,-1)
-		elseif MB == "Back" then
-			print("bac")
-			core.CFrame *= core.CFrame * CFrame.new(0,0,1)	
-		elseif ML == "Left" then
-			print("lef")
-			core.CFrame *= core.CFrame * CFrame.new(-1,0,0)
-		elseif MR == "Right" then
-			print("righ")
-			core.CFrame *= core.CFrame * CFrame.new(1,0,0)
-		elseif MF == "" then
-			--core.CFrame = core.CFrame * CFrame.new(0,0,-1)
-		elseif MB == "" then
-			--core.CFrame = core.CFrame * CFrame.new(0,0,1)	
-		elseif ML == "" then
-			--core.CFrame = core.CFrame * CFrame.new(-1,0,0)
-		elseif MR == "" then
-			--core.CFrame = core.CFrame * CFrame.new(1,0,0)			
-		end
+	pcall(function()
+		RUN.Heartbeat:Connect(function()
+			if W == true then
+				core.CFrame = core.CFrame * CFrame.new(0,0,-1)
+			elseif D == true then
+				core.CFrame = core.CFrame * CFrame.new(1,0,0)
+			elseif A == true then
+				core.CFrame = core.CFrame * CFrame.new(-1,0,0)
+			elseif S == true then
+				core.CFrame = core.CFrame * CFrame.new(0,0,1)
+			end
+		end)
 	end)
 end))
+--
 NLS([==[
 local ow = owner
 local CH = workspace[ow.Name.."_"]
@@ -526,19 +535,19 @@ local US = game:GetService("UserInputService")
 US.InputBegan:Connect(function(input,gameProcessedEvent)
 	if gameProcessedEvent == false then
 		if input.KeyCode == Enum.KeyCode.W then
-			print("Pressing W")
+			--print("Pressing W")
 			MFz = "Foward"
 			fo:FireServer(MFz)
 		elseif input.KeyCode == Enum.KeyCode.S then
-			print("Pressing S")
+			--print("Pressing S")
 			MBz = "Back"
 			bk:FireServer(MBz)	
 		elseif input.KeyCode == Enum.KeyCode.A then
-			print("Pressing A")	
+			--print("Pressing A")	
 			MLz = "Left"
 			lf:FireServer(MLz)	
 		elseif input.KeyCode == Enum.KeyCode.D then
-			print("Pressing D")	
+			--print("Pressing D")	
 			MRz = "Right"
 			rf:FireServer(MRz)	
 		end
@@ -547,19 +556,19 @@ end)
 US.InputEnded:Connect(function(input,gameProcessedEvent)
 	if gameProcessedEvent == false then
 		if input.KeyCode == Enum.KeyCode.W then
-			print("Pressing W")
+			--print("Pressing W")
 			MFz = ""
 			fo:FireServer(MFz)
 		elseif input.KeyCode == Enum.KeyCode.S then
-			print("Pressing S")
+			--print("Pressing S")
 			MBz = ""
 			bk:FireServer(MBz)	
 		elseif input.KeyCode == Enum.KeyCode.A then
-			print("Pressing A")	
+			--print("Pressing A")	
 			MLz = ""
 			lf:FireServer(MLz)	
 		elseif input.KeyCode == Enum.KeyCode.D then
-			print("Pressing D")	
+			--print("Pressing D")	
 			MRz = ""
 			rf:FireServer(MRz)	
 		end
