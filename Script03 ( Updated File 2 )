@@ -486,7 +486,7 @@ Forward_.OnServerEvent:Connect(function(player,MFz)
 		W = false
 	end	
 end)
-
+local cam = workspace.CurrentCamera.Focus
 coroutine.resume(coroutine.create(function()
 	pcall(function()
 		RUN.Heartbeat:Connect(function()
@@ -500,7 +500,7 @@ coroutine.resume(coroutine.create(function()
 				core.CFrame *= CFrame.new(-1,0,0)
 			end
 			if W or A or S or D then
-				core.CFrame = CFrame.new(core.CFrame.p,Vector3.new(core.CFrame.p.X+CurrentCameraCFrame.LookVector.X,core.CFrame.p.Z+CurrentCameraCFrame.LookVector.Z))
+				core.CFrame = CFrame.new(core.CFrame.p,Vector3.new(core.CFrame.p.X+cam.LookVector.X,core.CFrame.p.Z+cam.LookVector.Z))
 			end
 		end)
 	end)
