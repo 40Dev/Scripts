@@ -449,6 +449,8 @@ Animation.OnServerEvent:Connect(function(player)
 	end
 end)
 coroutine.resume(coroutine.create(function()
+	
+	NLS([==[
 	local ow = owner
 	local ch = workspace[ow.Name.."_"]
 	local aa = ch:WaitForChild("LL_")
@@ -565,9 +567,6 @@ coroutine.resume(coroutine.create(function()
 			end
 		end)
 	end)
-	
-	NLS([==[
-	
 	]==],LPLR.PlayerGui)
 end))
 --TS.Material = "SmoothPlastic"
