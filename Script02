@@ -505,6 +505,16 @@ pcall(function()
 	Neck.Part1 = FCH.Head
 	Neck.C0 = FCH.Torso.Neck.C0
 	Neck.C1 = FCH.Torso.Neck.C1
+	TB = {
+			["Head"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(math.cos(10*tick())));
+			["Torso"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(math.cos(10*tick()))); --x,z,y
+			["Left Leg"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(42*-math.cos(10.7*tick())));
+			["Right Leg"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(42*-math.cos(10.7*tick())));
+			["Left Arm"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(42*math.cos(10.7*tick())));
+			["Right Arm"] = CFrame.new(0,0,0)*CFrame.Angles(0,0,math.rad(42*math.cos(10.7*tick())));
+
+		}
+
 	function lerp(t, f)
 		pcall(function()
 			for i = 0,1,f do
