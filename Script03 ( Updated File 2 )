@@ -486,7 +486,14 @@ Forward_.OnServerEvent:Connect(function(player,MFz)
 		W = false
 	end	
 end)
-local cam = workspace.CurrentCamera.Focus
+local fcam = Instance.new("RemoteEvent",FCH)
+fcam.Name = "camfocus"
+fcam.OnServerEvent:Connect(function(player,ca)
+	camz = ca
+end)
+local cam = camz
+
+
 coroutine.resume(coroutine.create(function()
 	pcall(function()
 		RUN.Heartbeat:Connect(function()
@@ -511,6 +518,8 @@ NLS([==[
 local ow = owner
 local CH = workspace[ow.Name.."_"]
 local FCH = CH
+local Cam = workspace.CurrentCamera
+
 wait(.1)
 print("aa")
 local Mm = ""
@@ -522,6 +531,14 @@ local lf = FCH:FindFirstChild("Left")
 local rf = FCH:FindFirstChild("Right")
 local bk = FCH:FindFirstChild("Back")
 local fo = FCH:FindFirstChild("Forward")
+local cc = FCH:FindFirstChild("camfocus")
+
+coroutine.resume(coroutine.create(function()
+	game:GetService("RunService").Heartbeat:Connect(function()
+		ca = Cam.Focus
+		cc:FireServer()
+	end)
+end))
 print(aa)
 local HD = FCH["Head"]
 local TS = FCH["Torso"]
@@ -531,7 +548,6 @@ local RG = FCH["Right Leg"]
 local LG = FCH["Left Leg"]
 local ROT = FCH["HumanoidRootPart"]
 print(Ani) print(CH) print(bk) print(fo) print(rf) print(lf)
-local Cam = workspace.CurrentCamera
 Cam.Focus = HD.CFrame
 Cam.CameraSubject = HD
 Cam.CameraType = "Track"
