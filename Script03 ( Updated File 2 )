@@ -480,7 +480,7 @@ local RA = FCH["Right Arm"]
 local RG = FCH["Right Leg"]
 local LG = FCH["Left Leg"]
 local ROT = FCH["HumanoidRootPart"]
-print(Ani) print(CH)
+print(Ani) print(CH) print(bk) print(fo) print(rf) print(lf)
 local Cam = workspace.CurrentCamera
 Cam.Focus = HD.CFrame
 Cam.CameraSubject = HD
