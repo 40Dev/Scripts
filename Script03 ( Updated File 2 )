@@ -491,13 +491,13 @@ coroutine.resume(coroutine.create(function()
 	pcall(function()
 		RUN.Heartbeat:Connect(function()
 			if W == true then
-				core.CFrame *= core.CFrame * CFrame.new(0,0,1)
+				core.CFrame = core.CFrame * CFrame.new(0,0,1)
 			elseif D == true then
-				core.CFrame *= core.CFrame * CFrame.new(-1,0,0)
+				core.CFrame = core.CFrame * CFrame.new(-1,0,0)
 			elseif A == true then
-				core.CFrame *= core.CFrame * CFrame.new(1,0,0)
+				core.CFrame = core.CFrame * CFrame.new(1,0,0)
 			elseif S == true then
-				core.CFrame *= core.CFrame * CFrame.new(0,0,-1)
+				core.CFrame = core.CFrame * CFrame.new(0,0,-1)
 			end
 		end)
 	end)
