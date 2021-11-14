@@ -403,21 +403,8 @@ coroutine.resume(coroutine.create(function()
 		while true do
 
 			TS.Position = ROT.Position
-			if W then
-				look.CFrame = TS.CFrame * CFrame.new(0,0,5)
-			elseif A then
-				look.CFrame = TS.CFrame * CFrame.new(5,0,0)				
-			elseif S then
-				look.CFrame = TS.CFrame * CFrame.new(0,0,-5)				
-			elseif D then
-				look.CFrame = TS.CFrame * CFrame.new(-5,0,0)		
-			else
-				look.CFrame = TS.CFrame * CFrame.new(0,0,-5)
-			end
-			if W or S or A or D then
-				core.CFrame = CFrame.lookAt(core.Position,look.Position)
-				TS.Orientation = core.Orientation
-			end
+
+
 			--TS.Orientation = ROT.Orientation
 			ROT.Position = core.Position
 
@@ -505,6 +492,7 @@ local mouse = Instance.new("RemoteEvent",FCH)
 mouse.Name = "mouse"
 mouse.OnServerEvent:Connect(function(player,moz)
 	mo = moz
+	print(mo)
 end)
 local fmo = mo
 
