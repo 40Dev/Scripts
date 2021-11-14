@@ -535,7 +535,7 @@ local cc = FCH:FindFirstChild("camfocus")
 
 coroutine.resume(coroutine.create(function()
 	game:GetService("RunService").Heartbeat:Connect(function()
-		ca = Cam.CFrame
+		ca = Cam.Focus
 		cc:FireServer(ca)
 	end)
 end))
