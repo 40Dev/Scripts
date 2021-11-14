@@ -399,7 +399,10 @@ coroutine.resume(coroutine.create(function()
 		while true do
 
 			TS.Position = ROT.Position
-
+			local sms = {
+				Position = ROT.Position
+			}
+			PLAY(sms,TS)
 			--TS.Orientation = ROT.Orientation
 			ROT.Position = core.Position
 
