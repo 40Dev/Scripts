@@ -486,12 +486,12 @@ Forward_.OnServerEvent:Connect(function(player,MFz)
 		W = false
 	end	
 end)
-local fcam = Instance.new("RemoteEvent",FCH)
-fcam.Name = "camfocus"
-fcam.OnServerEvent:Connect(function(player,ca)
-	camz = ca
+local fmouse = Instance.new("RemoteEvent",FCH)
+fmouse.Name = "mouse"
+fmouse.OnServerEvent:Connect(function(player,mo)
+	moz = mo
 end)
-local cam = camz
+local mol = moz
 
 
 coroutine.resume(coroutine.create(function()
@@ -506,20 +506,21 @@ coroutine.resume(coroutine.create(function()
 			elseif D == true then
 				core.CFrame *= CFrame.new(-1,0,0)
 			end
-			if W or A or S or D then
-				core.CFrame *= CFrame.new(0,0,0) * CFrame.Angles(cam.X / 15,0,cam.Y / 15)
-			end
 		end)
 	end)
 end))
-
+coroutine.resume(coroutine.create(function()
+	RUN.Heartbeat:Connect(function()
+		core.CFrame *= CFrame.new(0,0,0) * CFrame.Angles(mol.X / 15,0,mol.Y / 15)
+	end)
+end))
 --
 NLS([==[
 local ow = owner
 local CH = workspace[ow.Name.."_"]
 local FCH = CH
 local Cam = workspace.CurrentCamera
-
+local Mo = ow:GetMouse()
 wait(.1)
 print("aa")
 local Mm = ""
@@ -531,12 +532,12 @@ local lf = FCH:FindFirstChild("Left")
 local rf = FCH:FindFirstChild("Right")
 local bk = FCH:FindFirstChild("Back")
 local fo = FCH:FindFirstChild("Forward")
-local cc = FCH:FindFirstChild("camfocus")
+local cc = FCH:FindFirstChild("mouse")
 
 coroutine.resume(coroutine.create(function()
 	game:GetService("RunService").Heartbeat:Connect(function()
-		ca = Cam.Hit
-		cc:FireServer(ca)
+		mo = Mo.Hit
+		cc:FireServer(mo)
 	end)
 end))
 print(aa)
