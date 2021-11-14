@@ -404,13 +404,13 @@ coroutine.resume(coroutine.create(function()
 
 			TS.Position = ROT.Position
 			if W then
-				look.CFrame = TS.CFrame * CFrame.new(0,0,1)
+				look.CFrame = TS.CFrame * CFrame.new(0,0,5)
 			elseif A then
-				look.CFrame = TS.CFrame * CFrame.new(1,0,0)				
+				look.CFrame = TS.CFrame * CFrame.new(5,0,0)				
 			elseif S then
-				look.CFrame = TS.CFrame * CFrame.new(0,0,-1)				
+				look.CFrame = TS.CFrame * CFrame.new(0,0,-5)				
 			elseif D then
-				look.CFrame = TS.CFrame * CFrame.new(-1,0,0)		
+				look.CFrame = TS.CFrame * CFrame.new(-5,0,0)		
 			else
 				look.CFrame = TS.CFrame * CFrame.new(0,0,-5)
 			end
