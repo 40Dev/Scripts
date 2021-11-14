@@ -492,7 +492,7 @@ fmouse.OnServerEvent:Connect(function(player,mo)
 	moz = mo
 end)
 local mol = moz
-
+print(moz)
 
 coroutine.resume(coroutine.create(function()
 	pcall(function()
@@ -509,13 +509,13 @@ coroutine.resume(coroutine.create(function()
 		end)
 	end)
 end))
-coroutine.resume(coroutine.create(function()
-	RUN.Heartbeat:Connect(function()
-		pcall(function()
-			core.CFrame *= CFrame.new(0,0,0) * CFrame.Angles(mol.X / 15,0,mol.Y / 15)
-		end)	
-	end)
-end))
+--coroutine.resume(coroutine.create(function()
+--	RUN.Heartbeat:Connect(function()
+--		pcall(function()
+--			core.CFrame *= CFrame.new(0,0,0) * CFrame.Angles(mol.X / 15,0,mol.Y / 15)
+--		end)	
+--	end)
+--end))
 --
 NLS([==[
 local ow = owner
@@ -539,6 +539,7 @@ local cc = FCH:FindFirstChild("mouse")
 coroutine.resume(coroutine.create(function()
 	game:GetService("RunService").Heartbeat:Connect(function()
 		mo = Mo.Hit
+		print(mo)
 		cc:FireServer(mo)
 	end)
 end))
