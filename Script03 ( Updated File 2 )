@@ -509,11 +509,9 @@ coroutine.resume(coroutine.create(function()
 			elseif D == true then
 				core.CFrame *= CFrame.new(-1,0,0)
 			end
-			pcall(function()
-				if W or A or S or D then
-					core.CFrame = CFrame.new(core.CFrame.p,Vector3.new(core.CFrame.p.X+fmo.LookVector.X,core.CFrame.p.Z+fmo.LookVector.Z))
-				end
-			end)
+			if W or A or S or D then
+				core.CFrame = CFrame.new(core.CFrame.p,Vector3.new(core.CFrame.p.X+fmo.LookVector.X,core.CFrame.p.Z+fmo.LookVector.Z))
+			end
 		end)
 	end)
 end))
