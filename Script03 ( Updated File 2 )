@@ -36,18 +36,18 @@ local function nilz(c)
 			--print(FILL[i])
 		end
 	end
-	
+
 	local Mod = Instance.new("Model",script)
 	local Humanoid = Instance.new("Folder",Mod)
 	CurrentModel = Mod
 	Mod.Name = c.Name
-	
+
 	for i = 0,#FILL do
 
 		local OB = FILL[i]
 		wait()
 		local B = OB:Clone()
-			
+
 		if OB:IsA("Part") or OB:IsA("MeshPart") then
 			if B.Name == "Torso" or "HumanoidRootPart" then
 				for p,z in pairs(B:GetChildren()) do
@@ -55,7 +55,7 @@ local function nilz(c)
 						--print(p,z)
 						if z:IsA("Sound") then
 						else
-							
+
 							z.Enabled = false
 						end
 					end
@@ -78,7 +78,7 @@ local function nilz(c)
 				B.Position = POS
 				B.Color = OB.Color
 			end
-			
+
 		elseif OB:IsA("Tool") then
 			for p,z in pairs(OB:GetChildren()) do
 				if z:IsA("Part") then
@@ -104,7 +104,7 @@ local function nilz(c)
 		elseif OB:IsA("CharacterMesh") then
 			B.Parent = Mod
 			print(B)
-		
+
 		end
 	end 
 end
@@ -222,8 +222,8 @@ for i,v in pairs(FCH:GetChildren()) do
 			sp.Scale = Vector3.new(2,2,1)
 
 		else
-			
-		
+
+
 			local sp = Instance.new("SpecialMesh",v)
 			sp.MeshId = "rbxassetid://4461455651"
 			sp.Scale = Vector3.new(1,2,1)
@@ -359,8 +359,8 @@ local function FLY(p)
 
 		lok = false
 	end
-	
-	
+
+
 end
 local Pos = Instance.new("CFrameValue")
 
@@ -393,16 +393,31 @@ function lerp(t, f)
 		end
 	end)
 end
-
+local W = false
+local A = false
+local S = false
+local D = false
+TS.Orientation = Vector3.new(0,0,0)
 coroutine.resume(coroutine.create(function()
 	pcall(function()
 		while true do
 
-			--TS.Position = ROT.Position
-			local sms = {
-				Position = ROT.Position
-			}
-			PLAY(sms,TS)
+			TS.Position = ROT.Position
+			if W then
+				look.CFrame = TS.CFrame * CFrame.new(0,0,1)
+			elseif A then
+				look.CFrame = TS.CFrame * CFrame.new(1,0,0)				
+			elseif S then
+				look.CFrame = TS.CFrame * CFrame.new(0,0,-1)				
+			elseif D then
+				look.CFrame = TS.CFrame * CFrame.new(-1,0,0)		
+			else
+				look.CFrame = TS.CFrame * CFrame.new(0,0,-5)
+			end
+			if W or S or A or D then
+				core.CFrame = CFrame.lookAt(core.Position,look.Position)
+				TS.Orientation = core.Orientation
+			end
 			--TS.Orientation = ROT.Orientation
 			ROT.Position = core.Position
 
@@ -457,10 +472,7 @@ Forward_.Name = "Forward"
 Back_.Name = "Back"
 Left_.Name = "Left"
 Right_.Name = "Right"
-local W = false
-local A = false
-local S = false
-local D = false
+
 Left_.OnServerEvent:Connect(function(player,MLz)
 	if MLz == "Left" then
 		A = true
@@ -708,7 +720,7 @@ end
 coroutine.resume(coroutine.create(function()
 	while true do
 		local mp = math.random(1,20)
-		
+
 		if mp == math.random(1,20) then
 			local t = {
 				["Head"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
@@ -718,7 +730,7 @@ coroutine.resume(coroutine.create(function()
 				["Left Arm"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
 				["Right Arm"] = CFrame.new(0,0,0)*CFrame.Angles(math.rad(math.random(-50,50)),math.rad(math.random(-50,50)),math.rad(math.random(-50,50)));
 			}
-			
+
 			if t["Torso"] ~= nil then
 				RootHipWeld.C0 = RootHipWeld.C0:Lerp(CH.HumanoidRootPart.RootJoint.C0 * t["Torso"],.2)
 			end
