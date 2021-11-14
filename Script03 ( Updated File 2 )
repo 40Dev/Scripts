@@ -541,7 +541,7 @@ local cc = FCH:FindFirstChild("mouse")
 
 coroutine.resume(coroutine.create(function()
 	game:GetService("RunService").Heartbeat:Connect(function()
-		moz = Mouses.Hit
+		moz = Mouses.Hit.p
 		cc:FireServer(moz)
 	end)
 end))
