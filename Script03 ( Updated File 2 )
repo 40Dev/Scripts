@@ -492,7 +492,7 @@ local mouse = Instance.new("RemoteEvent",FCH)
 mouse.Name = "mouse"
 mouse.OnServerEvent:Connect(function(player,moz)
 	mo = moz
-	print(mo.X,mo.Z)
+	--print(mo.X,mo.Z)
 end)
 
 coroutine.resume(coroutine.create(function()
@@ -508,7 +508,7 @@ coroutine.resume(coroutine.create(function()
 				core.CFrame *= CFrame.new(-1,0,0)
 			end
 			if W or A or S or D then
-				--core.CFrame = CFrame.new(core.CFrame.p,Vector3.new(core.CFrame.p.X+fmo.X,core.CFrame.p.Z+fmo.Z))
+				core.CFrame = CFrame.new(core.CFrame.p,Vector3.new(core.CFrame.p.X+mo.X,core.CFrame.p.Z+mo.Z))
 			end
 		end)
 	end)
