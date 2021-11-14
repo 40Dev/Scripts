@@ -525,7 +525,7 @@ local Mouses = ow:GetMouse()
 wait(.1)
 print("aa")
 local Mm = ""
-local Ani = "Idle"
+local Ani = "Walk"
 wait(.1)
 local aa = FCH:WaitForChild("LL_")
 wait(.6)
@@ -537,7 +537,7 @@ local cc = FCH:FindFirstChild("mouse")
 
 coroutine.resume(coroutine.create(function()
 	game:GetService("RunService").Heartbeat:Connect(function()
-		moz = Mouses.Hit.p
+		moz = Cam.CFrame.p
 		cc:FireServer(moz)
 	end)
 end))
