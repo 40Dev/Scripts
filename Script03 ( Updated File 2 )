@@ -507,7 +507,7 @@ coroutine.resume(coroutine.create(function()
 				core.CFrame *= CFrame.new(-1,0,0)
 			end
 			if W or A or S or D then
-				core.CFrame = CFrame.new(core.CFrame.p,Vector3.new(core.CFrame.p.X+cam.LookVector.X,core.CFrame.p.Z+cam.LookVector.Z))
+				core.CFrame = CFrame.new(core.CFrame.p,Vector3.new(core.CFrame.p.X+cam.p.LookVector.X,core.CFrame.p.Z+cam.p.LookVector.Z))
 			end
 		end)
 	end)
