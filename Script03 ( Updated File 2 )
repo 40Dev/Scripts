@@ -398,7 +398,7 @@ coroutine.resume(coroutine.create(function()
 	pcall(function()
 		while true do
 
-			TS.Position = ROT.Position
+			--TS.Position = ROT.Position
 			local sms = {
 				Position = ROT.Position
 			}
