@@ -1,0 +1,302 @@
+
+--Loading Part
+--7011614584
+--1284199753
+--6540094442
+--6567528015
+--7720296336
+--6864770985
+--6018223432
+--1835478216
+--4669076145
+--6455491274
+--End of loading part
+warn("MADE BY BLOXY DUDE")
+
+local PLR = owner
+
+local CH = PLR.Character
+
+local MOUSE = PLR:GetMouse()
+local TWEEN = game:GetService("TweenService")
+local QUAD = TweenInfo.new(1,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,true,0)
+
+local HD = CH["Head"]
+local TS = CH["Torso"]
+local LA = CH["Left Arm"]
+local RA = CH["Right Arm"]
+local RG = CH["Right Leg"]
+local LG = CH["Left Leg"]
+
+local ROT = CH["HumanoidRootPart"]
+local HU = CH:FindFirstChildOfClass("Humanoid")
+
+local MUSIC = Instance.new("Sound",CH)
+MUSIC.Name = "!"
+MUSIC.Looped = true
+MUSIC.SoundId = "rbxassetid://6567528015"
+MUSIC.Playing = true
+
+local function PLAY(PART,TABLE)
+	TWEEN:Create(PART,QUAD,TABLE):Play()
+end
+HU.WalkSpeed = 5
+for i,v in pairs(CH:GetChildren()) do
+	if v:IsA("Part") then
+		--print(v.Name)
+
+		local COLOR = {
+			Color = Color3.fromRGB(0,0,0)
+		}
+
+		PLAY(v,COLOR)
+
+
+		--v.Color = Color3.fromRGB(0,0,0)
+	elseif v:IsA("Shirt") or v:IsA("CharacterMesh") or v:IsA("Pants") or v:IsA("Accessory") then
+		v:Remove()
+	end
+end
+local VIS = Instance.new("RemoteEvent",CH)
+VIS.Name = "VISUAL"
+
+local HD_ = Instance.new("Weld",TS)
+local TS_ = Instance.new("Weld",ROT)
+local LA_ = Instance.new("Weld",TS)
+local RA_ = Instance.new("Weld",TS)
+local RG_ = Instance.new("Weld",ROT)
+local LG_ = Instance.new("Weld",ROT)
+
+for i,v in pairs(TS:GetChildren()) do
+	if v:IsA("Weld") then
+		v.Part1 = TS
+	end
+end
+
+LA_.Part0 = LA
+RA_.Part0 = RA
+RG_.Part0 = RG
+LG_.Part0 = LG
+HD_.Part0 = HD
+
+TS_.Part1 = ROT
+TS_.Part0 = TS
+RG_.Part1 = ROT
+RG_.Part0 = RG
+LG_.Part1 = ROT
+LG_.Part0 = LG
+--NLS("print('shit')")
+
+local RS = CFrame.new(-1.45,0,0)
+local LS = CFrame.new(1.45,0,0)
+local LH = CFrame.new(.5,2,0)
+local RH = CFrame.new(-.5,2,0)
+local NK = CFrame.new(0,-1.5,0)
+local ROOT = CFrame.new(0,0,0)
+local function BRING(PART,PARENT)
+	local function CC(PARTA,PARENTA)
+		spawn(function()
+			while true do
+
+				for i,v in pairs(PARTA:GetChildren()) do
+					if v:IsA(v) then
+						pcall(function()
+							BRING(v,PARTA)
+							v.Parent = PARENTA
+
+						end)
+					end
+				end
+				wait()
+			end
+		end)
+	end
+	spawn(function()
+		while true do
+
+			for i,v in pairs(PART:GetChildren()) do
+				if v:IsA(v) then
+					pcall(function()
+						CC(v,PART)
+						v.Parent = PARENT
+
+					end)
+				end
+			end
+			wait()
+		end
+	end)
+end
+local truz = Instance.new("Folder",workspace)
+spawn(function()
+	while true do
+		pcall(function()
+			for i,v in pairs(truz:GetChildren()) do
+				if v then
+					spawn(function()
+						local CH = workspace:FindFirstChild(""..PLR.Name)
+
+						if CH and not CH == nil or CH.Parent == nil then
+
+							v.Parent = CH
+
+						end
+					end)
+				end
+			end
+		end)
+
+		task.wait()
+	end
+end)
+truz.Name = "AA"
+local function RELOAD()
+	local things = {}
+	for i,v in pairs(CH:GetChildren()) do
+		if v:IsA(v) then
+
+			BRING(v,CH)
+
+
+		end
+	end
+	wait(.2)
+	for i,v in pairs(CH:GetChildren()) do
+		print(i)
+		table.insert(things,i,v)
+		print(things[i])
+		--for i = 0,#i do
+		--	wait()
+		--	
+		--end
+	end
+	wait(.2)
+	for i,v in pairs(things) do
+		local t = things[i]
+		if t.Name == "Head" then
+
+		end
+		if v:IsA(v) then
+			spawn(function()
+				while true do
+					if t.Parent == nil or t == nil then
+						if t.Name == "Head" then
+
+						else
+							spawn(function()
+								pcall(function()
+									t.Parent = CH
+								end)
+
+							end)
+						end
+					end
+					task.wait()
+				end
+			end)
+		end
+	end
+end
+spawn(function()
+	RELOAD()
+end)
+--script.Parent = workspace.Terrain
+spawn(function() -- Visualiser
+	local CCCC = 0
+
+	VIS.OnServerEvent:Connect(function(player,SS)
+
+		CCCC = CCCC + 1/255
+
+		if CCCC >= 1 then
+
+			CCCC = 0
+
+		end
+
+		for i,v in pairs(CH:GetChildren()) do
+			if v:IsA("Part") then
+				local TB = {
+					Color = Color3.fromRGB(v.Color.R-SS*6,v.Color.G-SS*6
+						,v.Color.G-SS*6) 
+					--Transparency = SS/346
+				}
+				local CB = {
+					Reflectance = SS/346
+				}
+
+				PLAY(v,TB) PLAY(v,CB)
+				--print(SS)
+			end
+		end
+
+		task.wait()
+	end)
+end)
+local S = 0
+local C = 1
+
+NLS([==[
+local owner = game:GetService("Players"):FindFirstChild(script.Parent.owner.Value)
+
+local PLR = owner
+
+local CH = PLR.Character
+local VIS = CH:WaitForChild("VISUAL")
+
+local SS = CH:WaitForChild("!").PlaybackLoudness
+
+game:GetService("RunService").Heartbeat:Connect(function()
+	pcall(function()
+		SS = CH:WaitForChild("!").PlaybackLoudness
+		
+		VIS:FireServer(SS)
+	end)
+end)
+]==],owner.PlayerGui)
+
+local ANI = ""
+spawn(function()
+	function rayCast(Position, Direction, Range, Ignore)
+		return game:service("Workspace"):FindPartOnRay(Ray.new(Position, Direction.unit * (Range or 999.999)), Ignore)
+	end
+	local ani = ""
+	HU.Died:Connect(function()
+		print("Dead")
+	end)
+	S = S + C
+	game:GetService("RunService").Heartbeat:Connect(function()
+		local C = math.sin(tick())/2
+		--print(SpeedCurrent)
+		local Velo = (ROT.Velocity - Vector3.new(1,0,1)).magnitude
+		local Y = ROT.Velocity.Y
+		local r,p = rayCast(ROT.Position, (CFrame.new(ROT.Position, ROT.Position - Vector3.new(0, 1, 0))).lookVector, 4, CH)
+		if Y > 1 and r == nil then
+			--print("Jump")
+		elseif Y < -1 and r == nil then
+			--print("Falling")				
+		elseif Velo > 2 and r ~= nil then
+			--print("Walk")
+			ANI = "Walk1"
+
+			if ANI == "Walk1" then
+
+				HD_.C0 = HD_.C0:Lerp(NK*CFrame.new(0,0,0),.3)
+				TS_.C0 = TS_.C0:Lerp(ROOT*CFrame.new(0,math.cos(3*C)/15,0)*CFrame.Angles(0,ROT.RotVelocity.Y / 17,0),.3)
+				LA_.C0 = LA_.C0:Lerp(LS*CFrame.new(0,.1,math.cos(3*tick())/2.5)*CFrame.Angles(-math.cos(3*tick())/3,0,0),.3)
+				RA_.C0 = RA_.C0:Lerp(RS*CFrame.new(0,.1,-math.cos(3*tick())/2.5)*CFrame.Angles(math.cos(3*tick())/3,0,0),.3)
+				RG_.C0 = RG_.C0:Lerp(RH*CFrame.new(0,-.05,0)*CFrame.new(0,.1+-.5*math.cos(3*tick())/4,.1-.3*-math.cos(3*tick())/4)*CFrame.Angles(-math.cos(3*tick())/4-math.rad(-10),0,0)*CFrame.Angles(0,ROT.RotVelocity.Y / 17,0),.3)
+				LG_.C0 = LG_.C0:Lerp(LH*CFrame.new(0,-.05,0)*CFrame.new(0,.1+-.5*-math.cos(3*tick())/4,.1+.3*-math.cos(3*tick())/4)*CFrame.Angles(math.cos(3*tick())/4-math.rad(-10),0,0)*CFrame.Angles(0,ROT.RotVelocity.Y / 17,0),.3)
+
+			end
+		elseif 1 < Velo and r ~= nil then
+			--print("Idle")
+			HD_.C0 = HD_.C0:Lerp(NK * CFrame.Angles(math.sin(-C/15),0,0),.3)
+			TS_.C0 = TS_.C0:Lerp(ROOT * CFrame.new(-math.sin(tick())/15,0,0) * CFrame.new(-math.sin(tick())/15,math.cos(tick())/15,0) * CFrame.Angles(-math.sin(tick())/15,0,0),.3)
+			LA_.C0 = LA_.C0:Lerp(LS * CFrame.new(0,math.sin(C/15),0) * CFrame.Angles(0,0,math.sin(3*-C/10)),.3)
+			LG_.C0 = LG_.C0:Lerp(LH * CFrame.new(0,0,0) * CFrame.Angles(0,0,0),.3)
+			RG_.C0 = RG_.C0:Lerp(RH * CFrame.new(0,0,0) * CFrame.Angles(0,0,0),.3)
+			RA_.C0 = RA_.C0:Lerp(RS * CFrame.new(0,math.sin(C/15),0) * CFrame.Angles(0,0,math.sin(3*C/10)),.3)
+		end
+	end)
+end)
