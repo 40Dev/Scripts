@@ -1,0 +1,463 @@
+local WELD = function(PARENT, PART0, PART1, C0, C1)
+    local I = Instance.new("Weld",PARENT)
+    I.Part0 = PART0
+    I.Part1 = PART1
+    I.C0 = C0
+    if C1 then
+        I.C1 = C1
+    end
+    return I
+end
+local CR = function(PARENT, ANCHORED, MATERIAL, X, Y, Z, PX, PY, PZ)
+    local I = Instance.new("Part",PARENT)
+    I.Material = MATERIAL
+    I.Size = Vector3.new(X, Y, Z)
+    I.Position = Vector3.new(PX, PY, PZ)
+    I.Anchored = ANCHORE
+    I.CanCollide = true
+    I.Massless = falses 
+    I.Locked = false
+    return I
+end
+local TW = game:GetService("TweenService")
+local INF = TweenInfo.new
+local QUADA = INF(2,Enum.EasingStyle.Quad,Enum.EasingDirection.Out,0,false,0)                                                                                
+local PLAY = function(PART,TABLE,SEV)
+    TW:Create(PART,TABLE,SEV):Play()
+end
+
+------------------Ae
+--_| Elevator |_--
+------------------
+--_Main Variables_--
+local OPENED = false
+local PLACEDEST = CFrame.new(0,10004.5,-22)
+local PLACETHINGS = {}
+local ORIGIN = CFrame.new(-5,2.7,0)
+local PLRS = {}
+local PC = {}
+
+--( Main Instances )--
+-- [Elevator Main] --
+-- ( Instances
+local F = CR(script, true, "Fabric", 15, 1, 15, 0, 3, 0)
+local PLAT = CR(script, false, "Grass", 17, 1, 17, 0, 0, 0)
+local FNUM = CR(script, false, "Metal", 4.7, 1.7, .2, 0, 0, 0)
+local HIT = CR(F, false, "Plastic", 15, 10, 15, 0, 0, 0)
+local EXF = CR(script, false, "Metal", 16, 2, 16, 0, 0, 0)
+local LW = CR(script, false, "Metal", 1, 12, 16, 0, 0, 0)
+local RW = CR(script, false, "Metal", 1, 12, 16, 0, 0, 0)
+local BK = CR(script, false, "Metal", 14.5, 12, 1, 0, 0, 0)
+local RF = CR(script, false, "Metal", 15, 1, 15, 0, 0, 0)
+local LT = CR(script, false, "Neon", 4, 1, 4, 0, 0, 0)
+local FL = CR(script, false, "Metal", 4, 12, 1, 0, 0, 0)
+local FR = CR(script, false, "Metal", 4, 12, 1, 0, 0, 0)
+local FT = CR(script, false, "Metal", 8.4, 3.5, 1, 0, 0, 0)
+local DL = CR(script, false, "Metal", 4, 12, .5, 0, 0, 0)
+local DR = CR(script, false, "Metal", 4, 12, .5, 0, 0, 0)
+--( Welds
+
+local RW_ = WELD(F, RW, F, CFrame.new(-F.Size.X/2, -RW.Size.Y/2, 0)*CFrame.Angles(0, 0, 0))
+local LW_ = WELD(F, LW, F, CFrame.new(F.Size.X/2, -LW.Size.Y/2, 0)*CFrame.Angles(0, 0, 0))
+local BK_ = WELD(F, BK, F, CFrame.new(0, -BK.Size.Y/2, -F.Size.Z/2)*CFrame.Angles(0, 0, 0))
+local RF_ = WELD(F, RF, F, CFrame.new(0, -11.25, 0)*CFrame.Angles(0, 0, 0))
+local LT_ = WELD(RF, LT, RF, CFrame.new(0, .1, 0)*CFrame.Angles(0, 0, 0))
+local RW_ = WELD(F, EXF, F, CFrame.new(0, 1.5, 0)*CFrame.Angles(0, 0, 0))
+local HIT_ = WELD(F, HIT, F, CFrame.new(0, -HIT.Size.Y/2, 0)*CFrame.Angles(0, 0, 0))
+local FL_ = WELD(F, FL, F, CFrame.new(-1.5 - -FL.Size.X - F.Size.X/2, -FL.Size.Y/2, F.Size.Z/2))
+local FR_ = WELD(F, FR, F, CFrame.new(1.5 + -FR.Size.X - -F.Size.X/2, -FR.Size.Y/2, F.Size.Z/2))
+local FT_ = WELD(F, FT, F, CFrame.new(0, -10.25, F.Size.Z/2))
+local DL_ = WELD(FL, DL, FL, CFrame.new(0, 0, 0))
+local DR_ = WELD(FR, DR, FR, CFrame.new(0, 0, 0))
+local PLAT_ = WELD(EXF, PLAT, EXF, CFrame.new(0, PLAT.Size.Y/2, 0))
+local FNUM_ = WELD(FT, FNUM, FT, CFrame.new(0, .5, FT.Size.Z/2)*CFrame.Angles(0, math.rad(-180), 0))
+--|_Main Elevator Parts_|--
+local LTM = Instance.new("PointLight", LT)
+local S = Instance.new("Sound",LT)
+local OPENSOUND = Instance.new("Sound",FT)
+local CLICK = Instance.new("Sound",FRM)
+local CLOSESOUND = Instance.new("Sound",FT)
+local SG = Instance.new("SurfaceGui")
+--SG.Parent = FNUM
+SG.CanvasSize = Vector2.new(.8, .8)
+local TL = Instance.new("TextLabel",SG)
+TL.Size = UDim2.new(1, 0, 1, 0)
+TL.BackgroundTransparency = .5
+TL.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TL.TextColor3 = Color3.fromRGB(255, 255, 255)
+TL.Text = "Apple Bottom"
+TL.TextScaled = true
+--TL.FontSize = Enum.FontSize.Size96
+TL.Font = Enum.Font.Arcade
+TL.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+--SG.Adornee = FNUM
+CLICK.SoundId = "rbxassetid://9083627113"
+OPENSOUND.SoundId = "rbxassetid://3306229401"
+CLOSESOUND.SoundId = "rbxassetid://845784949"
+S.Looped = true
+--1848368720
+S.SoundId = "rbxassetid://9044565954"
+S.Volume = .1
+LTM.Color = Color3.new(1, 1, 1)
+LTM.Brightness = 1
+LTM.Range = 16
+LTM.Shadows = true
+HIT.CanCollide = false
+HIT.Transparency = 1
+FNUM.Color = Color3.fromRGB(203,203,203)
+S:Play()
+
+-- [Buttons] --
+
+--: Outside
+--( Instances
+
+local FRM = CR(script, false, "Metal", 2, 3, .1, 0, 0, 0)
+local BD = CR(script, false, "ForceField", 1, 1, .3, 0, 0, 0)
+local BT = CR(script, false, "ForceField", 1, 1, .3, 0, 0, 0)
+--( Welds
+
+local FRM_ = WELD(FL, FRM, FL, CFrame.new(0, 1, FL.Size.Z / 2))
+local BD_ = WELD(FRM, BD, FRM, CFrame.new(0, .6, .1))
+local BT_ = WELD(FRM, BT, FRM, CFrame.new(0, -.6, .1))
+
+--|_Main Button Parts_|--
+local BDC = Instance.new("ClickDetector",BD)
+local BTC = Instance.new("ClickDetector",BT)
+FRM.Color = Color3.fromRGB(203,203,203)
+
+--: Inside
+--( Instances
+
+local IFRM = CR(script, false, "Metal", 2, 3, .1, 0, 0, 0)
+local IBD = CR(script, false, "ForceField", 1, 1, .3, 0, 0, 0)
+local IBT = CR(script, false, "ForceField", 1, 1, .3, 0, 0, 0)
+--( Welds
+
+local IFRM_ = WELD(FL, IFRM, FL, CFrame.new(0, 1, -FL.Size.Z / 2))
+local IBD_ = WELD(IFRM, IBD, IFRM, CFrame.new(0, .6, -.1))
+local IBT_ = WELD(IFRM, IBT, IFRM, CFrame.new(0, -.6, -.1))
+
+--|_Main Button Parts_|--
+local IBDC = Instance.new("ClickDetector",IBD)
+local IBTC = Instance.new("ClickDetector",IBT)
+IFRM.Color = Color3.fromRGB(203,203,203)
+
+--( Elevevator Core )--
+
+local CLOS = function()
+    local DRR = {C0 = CFrame.new(-3, 0, 0)}
+    local DLL = {C0 = CFrame.new(3, 0, 0)}
+    PLAY(DL_, QUADA, DLL) PLAY(DR_, QUADA, DRR) CLOSESOUND:Play() OPENED = false
+end
+local OPE = function()
+    local DRR = {C0 = CFrame.new(.5, 0, 0)}
+    local DLL = {C0 = CFrame.new(-.5, 0, 0)}
+    PLAY(DL_, QUADA, DLL) PLAY(DR_, QUADA, DRR) OPENSOUND:Play() OPENED = true
+end
+local BAC = function() 
+    F.CFrame = ORIGIN
+    --TL.Text = "1"
+    for i, v in PLRS do
+        local p = v:FindFirstChild("HumanoidRootPart")
+        if p then
+            p.CFrame = CFrame.new(F.Position+PC[v.Name][1]) * PC[v.Name][2]
+        end
+    end 
+end
+local GO = function(FLO) 
+    F.CFrame = PLACEDEST
+    --TL.Text = FLO
+    for i, v in PLRS do
+        local p = v:FindFirstChild("HumanoidRootPart")
+        if p then
+            p.CFrame = CFrame.new(F.Position+PC[v.Name][1]) * PC[v.Name][2]
+        end
+    end 
+end
+--( Buttons >
+
+BTC.MouseClick:Connect(function()
+    if OPENED == false then
+        OPE() CLICK:Play()
+    end
+end)
+BDC.MouseClick:Connect(function()
+    if OPENED == true then
+        CLOS() CLICK:Play()
+    end
+end)
+IBTC.MouseClick:Connect(function()
+    if OPENED == false then
+        OPE() CLICK:Play()
+    end
+end)
+IBDC.MouseClick:Connect(function()
+    if OPENED == true then
+        CLOS() CLICK:Play()
+    end
+end)
+
+--__--
+HIT.Touched:Connect(function(hit)
+    local p = hit.parent
+    pcall(function()
+        if p:FindFirstChild("Humanoid") then	
+            local Character = p		
+            local Player = game.Players:GetPlayerFromCharacter(Character)	
+            local AlreadyInTable = false		
+            for _,OtherPlayer in next,PLRS do		               
+            if OtherPlayer == Player then			                 
+                AlreadyInTable = true		
+            end
+		end       
+        if not AlreadyInTable then          
+            local ay = p:FindFirstChild("HumanoidRootPart")
+            local off = ay.Position-F.Position
+            local rotation = ay.CFrame-ay.CFrame.Position
+            PC[Character.Name] = {off, rotation}
+		    table.insert(PLRS,Character)
+            spawn(function()                         
+                local inside = workspace:GetPartsInPart(HIT)                   
+                for m, t in pairs(inside) do                                                          
+                    local yo = t.Parent:FindFirstChild("HumanoidRootPart")                      
+                    if yo then                                       
+                        if t.Parent == Character then                        
+                            local of = yo.Position-F.Position                        
+                            local rotatio = yo.CFrame-yo.CFrame.Position                  
+                            PC[Character.Name] = {of, rotatio}                        
+                        end                       
+                    end                  
+                end
+            end)
+        else
+            local ay = p:FindFirstChild("HumanoidRootPart")
+            local off = ay.Position-F.Position
+            local rotation = ay.CFrame-ay.CFrame.Position
+            PC[Character.Name] = {off, rotation}
+            spawn(function()
+                local inside = workspace:GetPartsInPart(HIT)                                 
+                for m, t in pairs(inside) do                                               
+                    local yo = t.Parent:FindFirstChild("HumanoidRootPart")                        
+                    if yo then                                                 
+                        if t.Parent == Character then                       
+                            local of = yo.Position-F.Position                        
+                            local rotatio = yo.CFrame-yo.CFrame.Position                        
+                            PC[Character.Name] = {of, rotatio}                        
+                        end                       
+                    end                    
+                end               
+            end)
+		end
+	end
+end)
+end)
+HIT.TouchEnded:Connect(function(hit)
+    local p = hit.parent
+    if p:FindFirstChild("Humanoid") then
+		local Character = p
+		local Player = game.Players:GetPlayerFromCharacter(Character)
+        for i, v in pairs(PLRS) do                 
+            if v == Character then                            
+                table.remove(PLRS, i, v)            
+            end
+        end
+    end
+end)
+
+--((Generation))--
+PLAT_:Remove()
+PLAT:Destroy()
+F.Anchored = true
+--GEN()
+
+BAC()
+CLOS()
+
+owner.Chatted:Connect(function(msg)
+    if msg == ".go" then
+        GO(FLOOR)
+    elseif msg == ".back" then
+        BAC()
+    end
+end)
+
+local Main = {Tiles={},Pillers={}}
+local Tiles = Main.Tiles
+local Pillers = Main.Pillers
+table.insert(Tiles,1, {X=0, Z=0})
+local Amount = 12
+
+local TileSize = Vector3.new(22, 4, 22)
+local TileMaterial = "Concrete"
+local TileColor = Color3.fromRGB(46, 46, 46)
+local PositionOffset = Vector3.new(0,10000,0)
+local LeftOffset = CFrame.new(TileSize.X, 0, 0)
+local RightOffset = CFrame.new(-TileSize.X, 0, 0)
+local BackOffset = CFrame.new(0, 0, -TileSize.Z)
+local ForwardOffset = CFrame.new(0, 0, -TileSize.Z)
+
+local CPart = function(Parent, Anchored, Position, Color, Size, Matawerial, CanCollide, Transparency)
+   
+    local p = Instance.new("Part",Parent)
+    p.Anchored = Anchored
+    p.Position = Position
+    p.Color = Color
+    p.Size = Size
+    p.Material = Material
+    p.CanCollide = CanCollide
+    if Transparency then
+    p.Transparency = Transparency
+    bzbtzhz
+    return p
+end
+local MakeWalls = =(Pmm nart,Material, Color)
+    local Left = falseug  fgf ege  
+    local Right = false
+    local Back = false
+    local Forward = false
+    local Up = false
+    for i = 0,1 do
+        --task.wait()
+        if Back == false then
+            local Real = Part.CFrame * CFrame.new(0, Part.Size.Z/2, Part.Size.Z/2.05)
+            local p = CPart(Part, true, Real.p, Color, Vector3.new(Part.Size.X, Part.Size.Z, Part.Size.Y), Material, true)
+            Back = true p.Name = "Back"
+        end
+        if Forward == false then
+            local Real = Part.CFrame * CFrame.new(0, Part.Size.Z/2, -Part.Size.Z/2.05)
+            local p = CPart(Part, true, Real.p, Color, Vector3.new(Part.Size.X, Part.Size.Z, Part.Size.Y), Material, true)
+            Forward = true p.Name = "Forward"
+        end
+        if Left == false then 
+            local Real = Part.CFrame * CFrame.new(Part.Size.X/2.05, Part.Size.Z/2, 0)
+            local p = CPart(Part, true, Real.p, Color, Vector3.new(Part.Size.X, Part.Size.Z, Part.Size.Y), Material, true)
+            Left = true p.Orientation = Vector3.new(0,-90,0) p.Name = "Left"
+        end
+        if Right == false then
+            local Real = Part.CFrame * CFrame.new(-Part.Size.X/2.05, Part.Size.Z/2, 0)
+            local p = CPart(Part, true, Real.p, Color, Vector3.new(Part.Size.X, Part.Size.Z, Part.Size.Y), Material, true)
+            Right = true p.Orientation = Vector3.new(0,90,0) p.Name = "Right"
+        end
+        if Up == false then
+            local Real = Part.CFrame * CFrame.new(0, Part.Size.Z, 0)
+            local p = CPart(Part, true, Real.p, Color, Vector3.new(Part.Size.X, Part.Size.Y, Part.Size.Z), Material, true)
+            Up = true p.Name = "Up"
+            
+        end
+    end
+end
+
+local Raycast = function(Instance, Direction, Offset, NDirection)
+    task.wait()
+    
+    
+    local Origin = Instance.Position
+    local Dir = Direction
+    local Ray = workspace:Raycast(Origin, Dir)
+    if Ray then
+        local Inst = Ray.Instance
+        --print("instanec")
+        if Inst then
+            local Parent = Inst.Parent
+            --print(Parent)
+            if Parent.Parent == script then
+                --print("wooo")
+                local Targ = nil
+                
+                for i,v in pairs(script:GetChildren()) do
+                    if v:IsA("Part") then
+                        if v.CFrame == Instance.CFrame * Offset then
+                            Targ = v
+                        end
+                    end
+                end
+                
+                if Targ then
+                   -- print(Targ.Name, Targ.Size)
+                    --print(Inst)
+                    Inst:Destroy()
+                else
+                    
+                    if NDirection == "Forward" then
+                        --Parent.Forward:Destroy()
+                    elseif NDirection == "Back" then
+                        --Parent.Back:Destroy()
+                    elseif NDirection == "Left" then
+                       -- Parent.Left:Destroy()
+                    elseif NDirection == "Right" then
+                       -- Parent.Right:Destroy()
+                    end
+                end
+                
+            end
+        end
+    end
+    
+    end
+    
+    end)
+end
+
+for X = 0,Amount-1 , 1 do
+    
+    for Z = 0,Amount-1, 1 do
+       
+        
+        local PX = X * TileSize.X
+        local PZ = Z * TileSize.Z
+        local Tile = CPart(script, true, PositionOffset+Vector3.new(PX, 0, -PZ), TileColor, TileSize, TileMaterial, true) 
+        local T = Instance.new("Texture",Tile)
+        T.Texture = "rbxassetid://4956516271"
+        T.Face = "Top"
+        MakeWalls(Tile, TileMaterial, TileColor)
+      --  Tiles[X][Z] = {T=Tiles}
+        spawn(function()
+    
+        for i= 0, 1 do
+        task.wait(.05)
+        Raycast(Tile, Vector3.new(0, 40, -160), ForwardOffset, "")  
+        Raycast(Tile, Vector3.new(-160, 40, 0), RightOffset, "")  
+        Raycast(Tile, Vector3.new(0, 40, 160), ForwardOffset, "")  
+        Raycast(Tile, Vector3.new(-160, 40, 0), RightOffset, "")  
+        end
+    
+        end)
+    end
+    
+    task.wait()
+end
+local Count = 0
+local mm = 0
+for i, v in pairs(script:GetChildren()) do
+    if v:IsA("Part") then
+        --print(v)
+        task.wait()
+       
+        Raycast(Tile, Vector3.new(0, 40, -160), ForwardOffset, "")  
+        Raycast(Tile, Vector3.new(-160, 40, 0), RightOffset, "")  
+        Raycast(Tile, Vector3.new(0, 40, 160), ForwardOffset, "")  
+        Raycast(Tile, Vector3.new(-160, 40, 0), RightOffset, "")  
+        if mm >= Amount then
+            Count = Count + 1
+            if Count == 2 then
+            spawn(function()
+                --wait(3)
+                print()
+                local p = CPart(v, true, v.Position+Vector3.new(0, v.Size.Z/12, 0),Color3.fromRGB(60,60,60), Vector3.new(v.Size.X/3, v.Size.Z*2, v.Size.Z/3), "Concrete", true)
+                local c = CPart(c, true, v.Position+Vector3.new(0, v.Size.Z/12, 0),Color3.fromRGB(math.random(150,180), math.random(24,64), 0), Vector3.new(v.Size.X/1.5, v.Size.Z*2, v.Size.Z/1.5), "CorrodedMetal", true, math.random(.3,.5))
+                --c.Transparency = .6  
+                
+            end)
+            Count = 0
+            end
+        end
+        if mm == Amount*2 then
+            mm = 0
+            Count = 0
+        end
+        mm = mm + 1
+        --print(mm)
+    end
+end
+
